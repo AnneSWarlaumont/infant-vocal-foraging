@@ -7,7 +7,7 @@ clc
 %also picking out relevant points for adult response data
 
 %generating_TimeSeries_data.m, generating_adultresponse2child_data.m, 
-%generating_childresponse2adult_data.m have to be run before this
+%generating_childresponse2adult_data.m, kmeanszscore.m have to be run before this
 load('chrespdata_raw.mat')
 load('addata_raw.mat')
 load('data_zkm.mat')
