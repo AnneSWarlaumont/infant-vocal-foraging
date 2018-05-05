@@ -2,7 +2,7 @@
 clear all
 clc
 
-%email notes:
+%Run kmeanzscore.m before running this
 %Monica completed 340 at 6 months. part of 530 at 3 months (not using Monica 530 at 3 months)  
 %Alison:340 at 6 months, 274 at 3 months.
 %Edith: 530 at 3 months.
