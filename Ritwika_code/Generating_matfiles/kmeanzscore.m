@@ -3,6 +3,7 @@
 %continuous data are zscored and k-meansed separately. For each recording,
 %all the data 
 
+%run generating_TimeSeries_data.m before running this
 clear all
 clc
 
