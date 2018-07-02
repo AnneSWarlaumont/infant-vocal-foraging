@@ -1,4 +1,4 @@
-This directory contains files to analyse all the recordings as labelled by LENA. Run the files in generating_data_files 
+This directory contains files to analyse all the recordings as labelled by LENA. Run the files in generating_matfiles 
 before running files here. Within this directory, run these first (in no particular order):
 
 - adresp_stepsizepattern_onevoc.m
