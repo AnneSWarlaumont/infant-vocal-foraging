@@ -186,14 +186,14 @@ for jj = 1:length(aic_fch)
     [aicdiff_fch(jj,1),fitindicator_fch(jj,1)] = aicvalues_fordifffits(aic_fch{jj},3); %frequency is exp
     [aicdiff_dch(jj,1),fitindicator_dch(jj,1)] = aicvalues_fordifffits(aic_dch{jj},3); %amplitude is exp
     [aicdiff_spch(jj,1),fitindicator_spch(jj,1)] = aicvalues_fordifffits(aic_spch{jj},2); % space is lognormal
-    [aicdiff_timch(jj,1),fitindicator_timch(jj,1)] = aicvalues_fordifffits(aic_timch{jj},4); % time is lognormal
-    [aicdiff_velspch(jj,1),fitindicator_velspch(jj,1)] = aicvalues_fordifffits(aic_velspch{jj},3); % speed is lognormal
+    [aicdiff_timch(jj,1),fitindicator_timch(jj,1)] = aicvalues_fordifffits(aic_timch{jj},4); % time is pareto
+    [aicdiff_velspch(jj,1),fitindicator_velspch(jj,1)] = aicvalues_fordifffits(aic_velspch{jj},3); % speed is exponential
     
     [aicdiff_fnoch(jj,1),fitindicator_fnoch(jj,1)] = aicvalues_fordifffits(aic_fnoch{jj},3); %frequency is exp
     [aicdiff_dnoch(jj,1),fitindicator_dnoch(jj,1)] = aicvalues_fordifffits(aic_dnoch{jj},3); %amplitude is exp
     [aicdiff_spnoch(jj,1),fitindicator_spnoch(jj,1)] = aicvalues_fordifffits(aic_spnoch{jj},2); % space is lognormal
-    [aicdiff_timnoch(jj,1),fitindicator_timnoch(jj,1)] = aicvalues_fordifffits(aic_timnoch{jj},4); % time is lognormal
-    [aicdiff_velspnoch(jj,1),fitindicator_velspnoch(jj,1)] = aicvalues_fordifffits(aic_velspnoch{jj},3); % speed is lognormal
+    [aicdiff_timnoch(jj,1),fitindicator_timnoch(jj,1)] = aicvalues_fordifffits(aic_timnoch{jj},4); % time is pareto
+    [aicdiff_velspnoch(jj,1),fitindicator_velspnoch(jj,1)] = aicvalues_fordifffits(aic_velspnoch{jj},3); % speed is exponential
 end
 
 %store aicdifferences
