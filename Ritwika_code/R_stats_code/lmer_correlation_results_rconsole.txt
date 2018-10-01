@@ -1,0 +1,170 @@
+
+R version 3.4.0 (2017-04-21) -- "You Stupid Darkness"
+Copyright (C) 2017 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin15.6.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+[R.app GUI 1.70 (7338) x86_64-apple-darwin15.6.0]
+
+[History restored from /Users/ritu/.Rapp.history]
+
+> # You will need to install the lme4 and lmerTest packages.
+> # See http://derekogle.com/IFAR/supplements/installations/InstallPackagesRStudio.html
+> #linear mixed effects model to test the effect of age, step sizes in time, and optional response, sample size and age-response interaction on step sizes in acoustic space, for both infants and adults
+> #If response is considered an independent variable, 
+> #This exmaple is demonstrated using infant vocalisations. Change files and variables as necessary
+> 
+> library(lme4)
+Loading required package: Matrix
+> library(lmerTest)
+
+Attaching package: ‘lmerTest’
+
+The following object is masked from ‘package:lme4’:
+
+    lmer
+
+The following object is masked from ‘package:stats’:
+
+    step
+
+> 
+> # Set the working directory to the directory containing the csv file
+> # Modify the line below for your own file system
+> setwd('/Users/ritu/Desktop/csv_files_Apr172018')
+> 
+> # Load the data in the csv file into a data frame variable - change file as necessary
+> #the data generated for doing logistic regression already has the data we need for this
+> ch_fst = read.csv('advoc_logisticreg_stepsizes.csv', header = TRUE)
+> 
+> attach(ch_fst)
+> 
+> # Make ID be treated as a categorial variable instead of a numeric variable
+> id = as.factor(id)
+> 
+> #to find step size in acoustic space, we can simply do sqrt(freq step^2 + amplitude step^2)
+> 
+> sp_dist <- sqrt((freq_dist)^2 + (amp_dist)^2)
+> 
+> # Run a mixed effects regression - change dependent variable as necessary
+> chn_fstep_lmer_model = lmer(scale(sp_dist) ~ (1|id) + scale(infantage) + scale(time_dist), data = ch_fst)
+> summary(chn_fstep_lmer_model)
+Linear mixed model fit by REML 
+t-tests use  Satterthwaite approximations to degrees of freedom ['lmerMod']
+Formula: scale(sp_dist) ~ (1 | id) + scale(infantage) + scale(time_dist)
+   Data: ch_fst
+
+REML criterion at convergence: 878375.8
+
+Scaled residuals: 
+     Min       1Q   Median       3Q      Max 
+-14.0295  -0.7322  -0.2332   0.4939   7.6574 
+
+Random effects:
+ Groups   Name        Variance Std.Dev.
+ id       (Intercept) 0.01683  0.1297  
+ Residual             0.98889  0.9944  
+Number of obs: 310706, groups:  id, 17
+
+Fixed effects:
+                  Estimate Std. Error        df t value Pr(>|t|)    
+(Intercept)      1.013e-01  3.175e-02 1.600e+01    3.19  0.00579 ** 
+scale(infantage) 6.256e-02  1.880e-03 3.083e+05   33.28  < 2e-16 ***
+scale(time_dist) 5.014e-02  1.786e-03 3.107e+05   28.08  < 2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Correlation of Fixed Effects:
+            (Intr) scl(n)
+scal(nfntg)  0.006       
+scl(tm_dst) -0.004  0.001
+> 
+> #add or remove sample size and interaction effects
+> #plot(age, expf, col=c("red","blue")[withad])
+> #+ scale(smplsize) 
+> 
+> detach(ch_fst)
+> 
+> # You will need to install the lme4 and lmerTest packages.
+> # See http://derekogle.com/IFAR/supplements/installations/InstallPackagesRStudio.html
+> #linear mixed effects model to test the effect of age, step sizes in time, and optional response, sample size and age-response interaction on step sizes in acoustic space, for both infants and adults
+> #If response is considered an independent variable, 
+> #This exmaple is demonstrated using infant vocalisations. Change files and variables as necessary
+> 
+> library(lme4)
+> library(lmerTest)
+> 
+> # Set the working directory to the directory containing the csv file
+> # Modify the line below for your own file system
+> setwd('/Users/ritu/Desktop/csv_files_Apr172018')
+> 
+> # Load the data in the csv file into a data frame variable - change file as necessary
+> #the data generated for doing logistic regression already has the data we need for this
+> ch_fst = read.csv('chvoc_logisticreg_stepsizes.csv', header = TRUE)
+> 
+> attach(ch_fst)
+The following object is masked _by_ .GlobalEnv:
+
+    id
+
+> 
+> # Make ID be treated as a categorial variable instead of a numeric variable
+> id = as.factor(id)
+> 
+> #to find step size in acoustic space, we can simply do sqrt(freq step^2 + amplitude step^2)
+> 
+> sp_dist <- sqrt((freq_dist)^2 + (amp_dist)^2)
+> 
+> # Run a mixed effects regression - change dependent variable as necessary
+> chn_fstep_lmer_model = lmer(scale(sp_dist) ~ (1|id) + scale(infantage) + scale(time_dist), data = ch_fst)
+> summary(chn_fstep_lmer_model)
+Linear mixed model fit by REML 
+t-tests use  Satterthwaite approximations to degrees of freedom ['lmerMod']
+Formula: scale(sp_dist) ~ (1 | id) + scale(infantage) + scale(time_dist)
+   Data: ch_fst
+
+REML criterion at convergence: 315576.3
+
+Scaled residuals: 
+     Min       1Q   Median       3Q      Max 
+-10.1914  -0.7434  -0.2256   0.5096   8.2421 
+
+Random effects:
+ Groups   Name        Variance Std.Dev.
+ id       (Intercept) 0.002595 0.05094 
+ Residual             0.993465 0.99673 
+Number of obs: 111438, groups:  id, 17
+
+Fixed effects:
+                   Estimate Std. Error         df t value Pr(>|t|)    
+(Intercept)      -5.307e-03  1.352e-02  1.400e+01  -0.393    0.701    
+scale(infantage)  2.085e-03  3.097e-03  6.639e+04   0.673    0.501    
+scale(time_dist)  7.263e-02  2.992e-03  1.114e+05  24.278   <2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Correlation of Fixed Effects:
+            (Intr) scl(n)
+scal(nfntg)  0.034       
+scl(tm_dst) -0.001  0.019
+> 
+> #add or remove sample size and interaction effects
+> #plot(age, expf, col=c("red","blue")[withad])
+> #+ scale(smplsize)
+> 
+> detach(ch_fst)
+> 
+> 
