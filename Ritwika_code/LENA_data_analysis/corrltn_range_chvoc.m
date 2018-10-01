@@ -84,7 +84,7 @@ for i = 1:length(id_age)
     corrltn_ch(i,1) = r(1,2);
     corrpval_ch(i,1) = p(1,2);
     
-    samplsi(i,1) = length(d_day{i});
+    samplsi(i,1) = length(sp);
     agestr = strsplit(id_age{i},'_');  %finds age by splitting the id_age string
     id_ch{i,1} = agestr{1};
     age_ch(i,1) = str2num(agestr{2});
