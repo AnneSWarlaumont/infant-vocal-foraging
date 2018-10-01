@@ -12,7 +12,6 @@ library(lmerTest)
 setwd('/Users/ritu/Desktop/csv_files_Apr172018')
 
 # Load the data in the csv file into a data frame variable - change file as necessary
-#the data generated for doing logistic regression already has the data we need for this
 ch_fst = read.csv('chvoc_logisticreg_stepsizes.csv', header = TRUE)
 
 attach(ch_fst)
