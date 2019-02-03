@@ -154,12 +154,12 @@ for i  = 1:length(chst_factch)-1 %ignoring L3's 530 data, because only partly co
                 datachen = end_all{j};
                 datachlogf = z_logfall{j};
                 datachdb = z_dall{j};
-                datachk = km_all{j};
+                %datachk = km_all{j};
                 chst_humlab{datafactch_count} = datachst(idat);
                 chen_humlab{datafactch_count} = datachen(idat);
                 chlogf_humlab{datafactch_count} = datachlogf(idat);
                 chdb_humlab{datafactch_count} = datachdb(idat);
-                chkm_humlab{datafactch_count} = datachk(idat);
+                %chkm_humlab{datafactch_count} = datachk(idat);
                 chage(datafactch_count) = age(j);
                 listenerid{datafactch_count} = idmat{i,1};
                 childid(datafactch_count) = regexp(idmat{i,2},'[0-9]+','match');
@@ -186,12 +186,12 @@ for i  = 1:length(adst_factch)-1 %ignoring L3's 530 data
                 datachen = end_all{j};
                 datachlogf = z_logfall{j};
                 datachdb = z_dall{j};
-                datachk = km_all{j};
+                %datachk = km_all{j};
                 adst_humlab{datafactch_count} = datachst(idat);
                 aden_humlab{datafactch_count} = datachen(idat);
                 adlogf_humlab{datafactch_count} = datachlogf(idat);
                 addb_humlab{datafactch_count} = datachdb(idat);
-                adkm_humlab{datafactch_count} = datachk(idat);
+                %adkm_humlab{datafactch_count} = datachk(idat);
                 age_adhumlab(datafactch_count) = age(j);
                 listenerid_ad{datafactch_count} = idmat{i,1};
                 childid_ad(datafactch_count) = regexp(idmat{i,2},'[0-9]+','match');
@@ -272,7 +272,8 @@ for i = 1:length(chst_humlab)
 end
 
 
-save('humanlab_addat.mat','adst_humlab','aden_humlab','adlogf_humlab','addb_humlab','adkm_humlab','chresp2ad_humlab','listenerid_ad','childid_ad','speakerseg_ad','age_adhumlab')
-save('humanlab_chdat.mat','childid','speakerseg','listenerid','chage','chst_humlab','chen_humlab','chlogf_humlab','chdb_humlab','chkm_humlab','adresponse_humlab')
+save('humanlab_addat.mat','adst_humlab','aden_humlab','adlogf_humlab','addb_humlab','chresp2ad_humlab','listenerid_ad','childid_ad','speakerseg_ad','age_adhumlab')
+%,'adkm_humlab'
+save('humanlab_chdat.mat','childid','speakerseg','listenerid','chage','chst_humlab','chen_humlab','chlogf_humlab','chdb_humlab','adresponse_humlab')%,'chkm_humlab'
 
 
