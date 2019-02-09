@@ -11,3 +11,7 @@ stepsizedist_WR_WOR_advoc and stepsizedist_WR_WOR_chvoc determines best fit dist
 median_fn.m and prctile90_fn.m are functions to find median and 90th percentile values of pitch, amplitude, 2d acoustic space, and time step distributions of WR and WOR distributions.
 
 median_90prc_WR_WOR_lena.m uses the functions described above to generate .csv files of median and 90 percentile values.
+
+
+--------------
+.m files in this folder sholud be executed in the order described above (1 followed by 2)
