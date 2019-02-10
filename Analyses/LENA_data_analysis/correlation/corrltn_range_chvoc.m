@@ -95,7 +95,7 @@ for i = 1:length(id_age)
     corrltn_ch(i_count,1) = r(1,2);
     corrpval_ch(i_count,1) = p(1,2);
     
-    samplsi(i_count,1) = length(sp);
+    samplsi(i_count,1) = length(sp); %note that samplesize is after removing NaN entries
     agestr = strsplit(id_age{i},'_');  %finds age by splitting the id_age string
     id{i_count,1} = agestr{1};
     age(i_count,1) = str2num(agestr{2});
