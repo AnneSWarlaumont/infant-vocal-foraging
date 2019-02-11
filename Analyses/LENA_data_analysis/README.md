@@ -18,4 +18,4 @@ median_and_90prc_stepsizes: contains .m files used to determine median and 90th 
 
 logistic_regression: contains .m files used to generate data for carrying out logistic regression in R to determine whether certain pitch/amplitude values were more likely to receive responses. We also looked at whether specific vocalisation patterns (in terms of steps in freuqency, amplitude, and time) were more likley to receive responses. 
 
-
+Subfolders in stepssize_analysis can be executed in any order. 
