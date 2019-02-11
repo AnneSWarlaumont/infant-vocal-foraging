@@ -5,3 +5,5 @@ logisticregression_fn_HUM.m is a function file that creates a table with data fo
 logisticregression_fn_stsiz_HUM.m is a function file that creates a table with data for logistic regression analysis to determine which vocalisations are more likely to get a response - pitch, amplitude, and infant age are independent variables. In addition, step sizes in pitch, freuqency, and time immediately preceding the vocalistaion of interest are also independent variables
 
 data_forlogisticregression_HUM.m uses these functions to generate the .csv files for both adult and infant vocalisations based on human labelled data and the corresponding subset of LENA data.
+
+Note that all infant data were pooled together, and all adult daa were pooled together.
