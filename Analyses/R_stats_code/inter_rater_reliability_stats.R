@@ -4,7 +4,7 @@
 
 library(irr)
 
-setwd('/Users/ritu/Desktop/csv_files_Apr172018/interraterreliab')
+setwd('/Users/ritu/Desktop/csv_files_Apr172018/interraterreliab') #this folder should only contain data for inter rater reliability stats
 
 # Load the data in the csv file into a data frame variable - change file as necessary
 
