@@ -14,3 +14,5 @@ median_n_prctile_stats.r uses a linear mixed effects model to test the effect of
 stepsize_dist_param_stats.r uses a linear mixed effects model to test the effect of response, infant age and optional sample size on parameters of step size distributions (computed using AIC) with infant id as a random effect. Can also be optionally used for the same funcgionality as median_n_prctile_stats.r
 
 nonresponse_dpdt_measures_stats.r uses a linear mixed effects model to test the effect of infant age on mean and std dev of amplitude and frequency for infant and adult vocalisations, with infant id as a random effect.
+
+***Note that some code in this directory might require .csv files that are analysed to be grouped into folders.
