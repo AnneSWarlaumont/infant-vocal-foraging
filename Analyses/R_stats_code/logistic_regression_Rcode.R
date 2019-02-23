@@ -5,7 +5,8 @@
 
 # Set the working directory to the directory containing the csv file
 # Modify the line below for your own file system
-setwd('/Users/ritu/Desktop/csv_files_vfinal/logisticreg')
+setwd('/Users/ritu/Desktop/csv_files_vfinal/logisticreg')#this folder should only contain data for inter rater reliability stats
+
 
 library(lme4)
 library(lmerTest)
