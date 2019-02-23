@@ -1,7 +1,6 @@
 # You will need to install the irr package.
 # See http://derekogle.com/IFAR/supplements/installations/InstallPackagesRStudio.html
 #R code to determine interrater reliability for human labelled data and coresponding LENA labelled data
-#this .r file may also be used tov determine interrater reliability b/n listenrs L1 and L3 forinfant 340 at 183 days old
 
 library(irr)
 
