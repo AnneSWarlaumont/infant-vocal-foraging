@@ -7,7 +7,7 @@ correlation_lmer.r tests whether steps in acoustic space and time for infants an
 
 inter_rater_reliability_stats.r computes interrater reliability measures for human labelled data and corresponding LENA labelled data, and writes the results to a .csv file
 
-logisticregression.r uses a logistic regression model to test whether some vocalisations or vocalisation patterns are more likely to recieve responses.
+logistic_regression_Rcode.R uses a logistic regression model to test whether some vocalisations or vocalisation patterns are more likely to recieve responses.
 
 median_n_prctile_stats.r uses a linear mixed effects model to test the effect of response, infant age and optional sample size on median and 90th percentile value of step size distributions (computed before AIC-based fitting) with infant id as a random effect.
 
