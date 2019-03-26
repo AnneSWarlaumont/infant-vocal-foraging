@@ -1,4 +1,4 @@
-function [xaxis, yaxis_fit,yaxis_dat] = aicnew(timeSeries,plots,ssc);
+function [xaxis, yaxis_fit,yaxis_dat] = aicplots(timeSeries,plots,ssc);
 
 %This bit of code was adapted by Ritwika from code by Dr. Rhodes to
 %generate plots
