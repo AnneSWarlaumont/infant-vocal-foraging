@@ -12,3 +12,5 @@ Folder Analyses also contains code written by Ritwika in R (version 3.4.0 (2017-
 statistical tests on results obtained from (ii) and (iii). All R code is in folder R_stats_code.
 
 Please execute .m files from folders in the order specified in (i)-(iv), followed by code in R_stats_code.
+
+In addition, subfolder AIC_code_Theo_Rhodes contains code written by Dr. Theo Rhodes. This code was used in analysing step size distributions using AIC criterion. Make sure that this folder is in the path while running AIC criterion-based step size analyses.
