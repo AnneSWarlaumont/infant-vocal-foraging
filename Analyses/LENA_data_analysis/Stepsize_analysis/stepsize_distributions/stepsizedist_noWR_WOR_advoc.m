@@ -96,7 +96,6 @@ jj = 0;
 %find aic values
 for j = 1:length(distf_day)
 if (length(distsp_day{j}) > 2 ) %need more than 2 points (at least) to fit
-
 jj = jj + 1;
     
 [aic_f{jj},f_fit(jj,1),p] = aicnew(distf_day{j},[0 0 0 0],0);
@@ -108,6 +107,11 @@ smplsi(jj,1) = length(distf_day{j});
 agestr = strsplit(id_age{j},'_');  %finds age by splitting the id_age string
 id{jj,1} = agestr{1};
 age(jj,1) = str2num(agestr{2});
+
+rsq_f_advoc(jj,1) = aicfit_rsq(distf_day{j}); %calculates rms error for fits
+rsq_d_advoc(jj,1) = aicfit_rsq(distd_day{j});
+rsq_sp_advoc(jj,1) = aicfit_rsq(distsp_day{j});  
+rsq_t_advoc(jj,1) = aicfit_rsq(disttim_day{j});
 
 end
 end
@@ -150,8 +154,10 @@ end
 %recording the kind of fits for each category
 
 numberoffits_disc = table(age,id,f_fit,d_fit,sp_fit,tim_fit);
+rsq_tab = table(age,id,rsq_f_advoc,rsq_d_advoc,rsq_sp_advoc,rsq_t_advoc); %writes rms error table
 
 T_disc = table(id,age,expf,expd,lognspmu,lognspsig,logntimmu,logntimsig,smplsi);
+writetable(rsq_tab,'rsq_advoc_noWR_WOR.csv') %writes table to file
 writetable(T_disc,'advoc_stepsizedist_noWR_WOR.csv')
 writetable(numberoffits_disc,'fittypes_advoc_noWR_WOR.csv')
 

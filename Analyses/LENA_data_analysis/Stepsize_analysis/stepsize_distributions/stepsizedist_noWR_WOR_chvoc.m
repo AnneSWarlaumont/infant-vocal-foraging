@@ -1,7 +1,7 @@
 %Ritwika UC Merced
 %IVFCR
 
-%child vocalisations
+%child vocalisations  
 
 %Step sizes in pitch/frequency, amplitude, time and acoustic space are analysed WITHOUTm
 %sorting into WR (following a response) and WOR (following a
@@ -13,7 +13,7 @@
 %and WOR
 
 clear all
-clc
+%clc
 
 %AIC: 1 normal, 2 lognormal, 3 exponential, 4 pareto
 load('adresp_zkm_match.mat')
@@ -109,6 +109,11 @@ agestr = strsplit(id_age{j},'_');  %finds age by splitting the id_age string
 id{jj,1} = agestr{1};
 age(jj,1) = str2num(agestr{2});
 
+rsq_f_chvoc(jj,1) = aicfit_rsq(distf_day{j});
+rsq_d_chvoc(jj,1) = aicfit_rsq(distd_day{j});
+rsq_sp_chvoc(jj,1) = aicfit_rsq(distsp_day{j});  
+rsq_t_chvoc(jj,1) = aicfit_rsq(disttim_day{j});
+
 end
 end
 
@@ -150,8 +155,10 @@ end
 %recording the kind of fits for each category
 
 numberoffits_disc = table(age,id,f_fit,d_fit,sp_fit,tim_fit);
+rsq_tab = table(age,id,rsq_f_chvoc,rsq_d_chvoc,rsq_sp_chvoc,rsq_t_chvoc); %writs rms error table
 
 T_disc = table(id,age,expf,expd,lognspmu,lognspsig,logntimmu,logntimsig,smplsi);
+writetable(rsq_tab,'rsq_chvoc_noWR_WOR.csv') 
 writetable(T_disc,'chvoc_stepsizedist_noWR_WOR.csv')
 writetable(numberoffits_disc,'fittypes_chvoc_noWR_WOR.csv')
 
