@@ -150,9 +150,21 @@ agestr = strsplit(id_age{j},'_');  %finds age by splitting the id_age string
 id{jj,1} = agestr{1};
 age(jj,1) = str2num(agestr{2});
 
+rsq_f_ch(jj,1) = aicfit_rsq(distf_ch_day{j}); %calculates rms error for fits
+rsq_d_ch(jj,1) = aicfit_rsq(distd_ch_day{j});
+rsq_sp_ch(jj,1) = aicfit_rsq(distsp_ch_day{j});  
+rsq_t_ch(jj,1) = aicfit_rsq(disttim_ch_day{j});
+
+rsq_f_noch(jj,1) = aicfit_rsq(distf_noch_day{j}); %calculates rms error for fits
+rsq_d_noch(jj,1) = aicfit_rsq(distd_noch_day{j});
+rsq_sp_noch(jj,1) = aicfit_rsq(distsp_noch_day{j});  
+rsq_t_noch(jj,1) = aicfit_rsq(disttim_noch_day{j});
+
 end
 end
 
+rsq_tab = table(age,id,rsq_f_ch,rsq_d_ch,rsq_sp_ch,rsq_t_ch,rsq_f_noch,rsq_d_noch,rsq_sp_noch,rsq_t_noch); %writes rsq table
+writetable(rsq_tab,'rsq_chresp2ad.csv') %writes table to file
 clear jj
 
 %now, knowing that frequency and amplitude spaces fit best - by and large -

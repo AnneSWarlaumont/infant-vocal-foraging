@@ -150,8 +150,21 @@ agestr = strsplit(id_age{j},'_');  %finds age by splitting the id_age string
 id{jj,1} = agestr{1};
 age(jj,1) = str2num(agestr{2});
 
+rsq_f_ad(jj,1) = aicfit_rsq(distf_ad_day{j}); %calculates rms error for fits
+rsq_d_ad(jj,1) = aicfit_rsq(distd_ad_day{j});
+rsq_sp_ad(jj,1) = aicfit_rsq(distsp_ad_day{j});  
+rsq_t_ad(jj,1) = aicfit_rsq(disttim_ad_day{j});
+
+rsq_f_noad(jj,1) = aicfit_rsq(distf_noad_day{j}); %calculates rms error for fits
+rsq_d_noad(jj,1) = aicfit_rsq(distd_noad_day{j});
+rsq_sp_noad(jj,1) = aicfit_rsq(distsp_noad_day{j});  
+rsq_t_noad(jj,1) = aicfit_rsq(disttim_noad_day{j});
+
 end
 end
+
+rsq_tab = table(age,id,rsq_f_ad,rsq_d_ad,rsq_sp_ad,rsq_t_ad,rsq_f_noad,rsq_d_noad,rsq_sp_noad,rsq_t_noad); %writes rsq table
+writetable(rsq_tab,'rsq_adresp2ch.csv') %writes table to file
 
 clear jj
 

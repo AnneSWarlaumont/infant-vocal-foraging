@@ -154,7 +154,7 @@ end
 %recording the kind of fits for each category
 
 numberoffits_disc = table(age,id,f_fit,d_fit,sp_fit,tim_fit);
-rsq_tab = table(age,id,rsq_f_advoc,rsq_d_advoc,rsq_sp_advoc,rsq_t_advoc); %writes rms error table
+rsq_tab = table(age,id,rsq_f_advoc,rsq_d_advoc,rsq_sp_advoc,rsq_t_advoc); %writes rsq table
 
 T_disc = table(id,age,expf,expd,lognspmu,lognspsig,logntimmu,logntimsig,smplsi);
 writetable(rsq_tab,'rsq_advoc_noWR_WOR.csv') %writes table to file
