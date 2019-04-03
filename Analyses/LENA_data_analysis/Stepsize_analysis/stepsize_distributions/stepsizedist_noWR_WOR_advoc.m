@@ -157,6 +157,7 @@ numberoffits_disc = table(age,id,f_fit,d_fit,sp_fit,tim_fit);
 rsq_tab = table(age,id,rsq_f_advoc,rsq_d_advoc,rsq_sp_advoc,rsq_t_advoc); %writes rsq table
 
 T_disc = table(id,age,expf,expd,lognspmu,lognspsig,logntimmu,logntimsig,smplsi);
+save('advoc_stepsizes_noWR_WOR.mat','distf_day','distd_day','distsp_day','disttim_day','id_age')
 writetable(rsq_tab,'rsq_advoc_noWR_WOR.csv') %writes table to file
 writetable(T_disc,'advoc_stepsizedist_noWR_WOR.csv')
 writetable(numberoffits_disc,'fittypes_advoc_noWR_WOR.csv')
