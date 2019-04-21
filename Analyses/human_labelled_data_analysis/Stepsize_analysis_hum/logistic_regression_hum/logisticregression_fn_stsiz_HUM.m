@@ -54,9 +54,9 @@ time_dist = cell2mat((dist_t));
 listener = vertcat(listenercell{:});
 frequency = cell2mat(freq_cell);
 amplitude = cell2mat(amp_cell);
+infantid_listener = strcat(id,'_',listener); %concatenates infant id and listener id
 
-
-T_stsiz = table(amp_dist,freq_dist,frequency,amplitude,time_dist,infantage,response,id,listener);
+T_stsiz = table(amp_dist,freq_dist,frequency,amplitude,time_dist,infantage,response,infantid_listener);
 
 %remove rows with response = 100 (NA) - those correspond to "not
 %applicable" response

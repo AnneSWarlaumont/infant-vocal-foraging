@@ -26,8 +26,9 @@ infantage = cell2mat(agecell);
 response = transpose(cell2mat(adresponse));
 id = vertcat(idcell{:});
 listener = vertcat(listenercell{:});
+infantid_listener = strcat(id,'_',listener); %concatenates infant id and listener id
 
-T = table(amplitude,frequency,infantage,response,id,listener);
+T = table(amplitude,frequency,infantage,response,infantid_listener);
 
 %remove rows with response = 100 (NA) - those correspond to "not
 %applicable" response
