@@ -6,4 +6,4 @@ logisticregression_fn_stsiz_HUM.m is a function file that creates a table with d
 
 data_forlogisticregression_HUM.m uses these functions to generate the .csv files for both adult and infant vocalisations based on human labelled data and the corresponding subset of LENA data.
 
-Note that all infant data were pooled together, and all adult daa were pooled together.
+Note that all infant data were pooled together, and all adult daa were pooled together. Also note that due to the scarcity of WR data points for human labelled data, we did not pursue logistic regression analyses for human labelled data. 
