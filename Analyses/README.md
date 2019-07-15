@@ -9,7 +9,7 @@ iii) analyse data obtained from human listeners and the corresponding subset of 
 iv) plot relevant results (Plots)
 
 Folder Analyses also contains code written by Ritwika in R and MATLAB R2019a (R version 3.5.2 (2018-12-20) -- "Eggshell Igloo") to carry out 
-statistical tests on results obtained from (ii) and (iii). All R code is in folder stats_R and_matlab.
+statistical tests on results obtained from (ii) and (iii). All R and matlab code used for stats are in folder stats_R and_matlab.
 
 Please execute .m files from folders in the order specified in (i)-(iv), followed by code in stats_R and_matlab.
 
