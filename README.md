@@ -9,3 +9,5 @@ Pre-processing/ contains code from Anne used to pre-process LENA recordings befo
 Analyses/ contains code from Ritwika used to analyze the data from a foraging perspective.
 
 Further documentation can be found in README.md and About.md files within these directories and their subdirectories.
+
+All pre-processed data as well as both intermdeiate .csv and .mat files used for analyses and all results (.mat and .csv files) are available at https://osf.io/8ern6/
