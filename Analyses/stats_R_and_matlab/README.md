@@ -4,7 +4,7 @@ Also note, function cohensKappa.m was written by Elliot Layden and downloaded fr
 
 These files can be executed in any order.
 
-correlation_lmer.r tests whether steps in acoustic space and time for infants and adults are positively correlated using a linear mixed effects model by accouting for effects of infant age and optional response, and infantage-response interaction effects, and using infant id as a random effect.
+correlation_lmer.R tests whether steps in acoustic space and time for infants and adults are positively correlated using a linear mixed effects model by accouting for effects of infant age and optional response, and infantage-response interaction effects, and using infant id as a random effect.
 
 logistic_regression_Rcode.R uses a logistic regression model to test whether some vocalisations or vocalisation patterns are more likely to recieve responses for LENA data.
 
