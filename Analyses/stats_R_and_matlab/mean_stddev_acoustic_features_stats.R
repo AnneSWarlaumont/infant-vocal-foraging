@@ -7,9 +7,21 @@ library(lmerTest)
 
 # Set the working directory to the directory containing the csv file
 # Modify the line below for your own file system
-setwd("/Users/ritu/Google Drive/research/vocalisation/clean_code_thats_used/csv_files_vfinal")
+# setwd("/Users/ritu/Google Drive/research/vocalisation/clean_code_thats_used/csv_files_vfinal")
+# desiredfiles = dir(path=".", pattern="*corrltn_mean.csv")
 
-desiredfiles = dir(path=".", pattern="*corrltn_mean.csv")
+# Or, get the files from OSF (https://osf.io/8ern6/files/
+# You will need the osfr package, https://centerforopenscience.github.io/osfr/)
+# To get set up, run the following three lines of code:
+# install.packages("remotes")
+# library(remotes)
+# remotes::install_github("centerforopenscience/osfr")
+library(osfr)
+# If needed, modify the line below for your own file system
+setwd("~/Downloads")
+osf_retrieve_file("https://osf.io/4rma9/") %>% osf_download() # Downloads advoc_corrltn_mean.csv
+osf_retrieve_file("https://osf.io/ywmqb/") %>% osf_download() # Downloads chvoc_corrltn_mean.csv
+desiredfiles = c("~/Downloads/advoc_corrltn_mean.csv","~/Downloads/chvoc_corrltn_mean.csv")
 
 vocaliser = c()
 
@@ -53,7 +65,7 @@ for (i in 1:length(desiredfiles)){
 	}
 	
 	
-	setwd("/Users/ritu/Google Drive/research/vocalisation/clean_code_thats_used/csv_files_vfinal/Reported_results") #cd into folder to save into
+	# setwd("/Users/ritu/Google Drive/research/vocalisation/clean_code_thats_used/csv_files_vfinal/Reported_results") #cd into folder to save into
 
 mean_std_acousticdim_stats <- list(as.data.frame(vocaliser), 
  as.data.frame(dpdt_var),
