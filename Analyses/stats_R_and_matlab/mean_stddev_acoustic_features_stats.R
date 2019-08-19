@@ -21,7 +21,7 @@ library(osfr)
 setwd("~/Downloads")
 osf_retrieve_file("https://osf.io/4rma9/") %>% osf_download() # Downloads advoc_corrltn_mean.csv
 osf_retrieve_file("https://osf.io/ywmqb/") %>% osf_download() # Downloads chvoc_corrltn_mean.csv
-desiredfiles = c("~/Downloads/advoc_corrltn_mean.csv","~/Downloads/chvoc_corrltn_mean.csv")
+desiredfiles = c("advoc_corrltn_mean.csv","chvoc_corrltn_mean.csv")
 
 vocaliser = c()
 
