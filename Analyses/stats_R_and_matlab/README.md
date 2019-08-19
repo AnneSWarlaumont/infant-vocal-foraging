@@ -14,7 +14,7 @@ makenewdf_stepsiparam_lmer.R is a function required to run stepsize_dist_param_s
 
 median_lmer_stats.R and prctile90_lmer_stats.R use a linear mixed effects model runs a linear mixed effects model on median and 90th percentile value of step size distributions (computed before AIC-based fitting) with infant ID as a random effect; infant age and response as fixed efefcts; and sample size, and infantage-response interaction as optional fixed effects. 
 
-mean_stddev_acoustic_features_stats.R uses a linear mixed effects model runs a linear mixed effects model on mean and std. dev of acoustic features (normalised amplitude and log pitch) with infant ID as a random effect and infant age as a fixed effect.
+mean_stddev_acoustic_features_stats.R uses a linear mixed effects model runs a linear mixed effects model on mean and std. dev of acoustic features (normalised amplitude and log pitch) with infant ID as a random effect and infant age as a fixed effect. Outputs "mean_std_acousticdim_stats.csv".
 
 
 
