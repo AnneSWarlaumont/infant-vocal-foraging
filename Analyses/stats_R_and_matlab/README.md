@@ -14,7 +14,7 @@ stepsize_dist_param_stats.R runs a linear mixed effects model for step size dist
 
 makenewdf_stepsiparam_lmer.R is a function required to run stepsize_dist_param_stats.R, where only teh majority fit type curves are selected for the analyses for a given distribution type. For example, the majority best fit type for infant pitch step size distributions (WR) is exponential. This function writes a dataframe that only contains infant pitch step size distributions (WR) that are determined to best fit to an exponential per AIC to perform the linear mixed effects analysis on. 
 
-median_lmer_stats.R and prctile90_lmer_stats.R use a linear mixed effects model runs a linear mixed effects model on median and 90th percentile value of step size distributions (computed before AIC-based fitting) with infant ID as a random effect; infant age and response as fixed efefcts; and sample size, and infantage-response interaction as optional fixed effects. 
+median_lmer_stats.R and prctile90_lmer_stats.R use a linear mixed effects model runs a linear mixed effects model on median and 90th percentile value of step size distributions (computed before AIC-based fitting) with infant ID as a random effect; infant age and response as fixed efefcts; and sample size, and infantage-response interaction as optional fixed effects. Output "median_stats.csv" and "prctile90_stats.csv", respectively. 
 
 
 
