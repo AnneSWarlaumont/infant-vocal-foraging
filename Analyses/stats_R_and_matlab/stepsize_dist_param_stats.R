@@ -50,7 +50,7 @@ for (i in 1:length(desiredfiles)){
 	
 	attach(mydata)
 	
-	# Make ID and response be treated as a categorial variable instead of a numeric variable
+	# Make ID and response be treated as a categorical variable instead of a numeric variable
 	mydata$id = as.factor(mydata$id)
 	mydata$response = as.factor(mydata$response)
 	
@@ -58,6 +58,7 @@ for (i in 1:length(desiredfiles)){
 		
 		dpdtvar = mydata[j] #gets the dependent variable
 		
+		# Create a data frame that only has data for distributions whose best fit matches the majority fit for that data type:
 		df_foranalysis = makenewdf_stepsiparam_lmer(mydata,dpdtvar,j) #j is dependent variable index
 		
 		###############################
