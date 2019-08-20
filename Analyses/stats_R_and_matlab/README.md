@@ -14,7 +14,7 @@ These files can be executed in any order (except for makenewdf_stepsiparam_lmer.
 
 **makenewdf_stepsiparam_lmer.R** is a function required to run stepsize_dist_param_stats.R, where only the majority fit type curves are selected for the analyses for a given distribution type. For example, the majority best fit type for infant pitch step size distributions (WR) is exponential. This function writes a dataframe that only contains infant pitch step size distributions (WR) that are determined to best fit to an exponential per AIC to perform the linear mixed effects analysis on. It is assumed that the input csv files have columns where the parameters for each step type distribution are the ones appropriate for the majority fit type.
 
-**logistic_regression_Rcode.R** uses a logistic regression model to test whether some vocalisations or vocalisation patterns are more likely to recieve responses for LENA data.
+**logistic_regression_Rcode.R** uses a logistic regression model to test whether some vocalisations or vocalisation patterns are more likely to recieve responses for LENA data. Outputs "logistic_regression_results.csv".
 
 
 
