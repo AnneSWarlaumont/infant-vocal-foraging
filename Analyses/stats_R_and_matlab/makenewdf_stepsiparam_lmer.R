@@ -15,7 +15,7 @@ makenewdf_stepsiparam_lmer <- function(mydata,dpdtvar,dpdtvar_index) { #we make 
 		uniqv <- unique(filter_col)
 	    mode_fit = uniqv[which.max(tabulate(match(filter_col, uniqv)))]
 	    
-	    mydata_filter = mydata[mydata$d_fit == mode_fit,] #filter mydata based on majprity fit type for the dependent variable of interest
+	    mydata_filter = mydata[mydata$d_fit == mode_fit,] #filter mydata based on majority fit type for the dependent variable of interest
 	   
 	}else if (grepl("f",name_of_dpdt) == 1){#for expf - frequency parameters
 		
@@ -25,7 +25,7 @@ makenewdf_stepsiparam_lmer <- function(mydata,dpdtvar,dpdtvar_index) { #we make 
 		uniqv <- unique(filter_col)
 	    mode_fit = uniqv[which.max(tabulate(match(filter_col, uniqv)))]
 	    
-	    mydata_filter = mydata[mydata$f_fit == mode_fit,] #filter mydata based on majprity fit type for the dependent variable of interest
+	    mydata_filter = mydata[mydata$f_fit == mode_fit,] #filter mydata based on majority fit type for the dependent variable of interest
 	
 	}else if (grepl("sp",name_of_dpdt) == 1) { #for space fits
 		
@@ -35,7 +35,7 @@ makenewdf_stepsiparam_lmer <- function(mydata,dpdtvar,dpdtvar_index) { #we make 
 		uniqv <- unique(filter_col)
 	    mode_fit = uniqv[which.max(tabulate(match(filter_col, uniqv)))]
 	    
-	    mydata_filter = mydata[mydata$sp_fit == mode_fit,] #filter mydata based on majprity fit type for the dependent variable of interest
+	    mydata_filter = mydata[mydata$sp_fit == mode_fit,] #filter mydata based on majority fit type for the dependent variable of interest
 		
 	}else if (grepl("tim",name_of_dpdt) == 1) { #for time fits
 		
@@ -45,7 +45,7 @@ makenewdf_stepsiparam_lmer <- function(mydata,dpdtvar,dpdtvar_index) { #we make 
 		uniqv <- unique(filter_col)
 	    mode_fit = uniqv[which.max(tabulate(match(filter_col, uniqv)))]
 	    
-	    mydata_filter = mydata[mydata$tim_fit == mode_fit,] #filter mydata based on majprity fit type for the dependent variable of interest	
+	    mydata_filter = mydata[mydata$tim_fit == mode_fit,] #filter mydata based on majority fit type for the dependent variable of interest	
 	
 	}	
 	  
