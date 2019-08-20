@@ -7,9 +7,21 @@ library(lmerTest)
 
 # Set the working directory to the directory containing the csv file
 # Modify the line below for your own file system
-setwd("/Users/ritu/Google Drive/research/vocalisation/clean_code_thats_used/csv_files_vfinal")
+# setwd("/Users/ritu/Google Drive/research/vocalisation/clean_code_thats_used/csv_files_vfinal")
+# desiredfiles = dir(path=".", pattern="^prctile*") #only files taht start with median
 
-desiredfiles = dir(path=".", pattern="^prctile*") #only files taht start with median
+# Or, get the files from OSF (https://osf.io/8ern6/files/
+# You will need the osfr package, https://centerforopenscience.github.io/osfr/)
+# To get set up, run the following three lines of code:
+# install.packages("remotes")
+# library(remotes)
+# remotes::install_github("centerforopenscience/osfr")
+library(osfr)
+# If needed, modify the line below for your own file system
+setwd("~/Downloads")
+osf_retrieve_file("https://osf.io/yjxg9/") %>% osf_download() # Downloads prctile90_adresp2ch.csv
+osf_retrieve_file("https://osf.io/a5fzj/") %>% osf_download() # Downloads prctile90_chresp2ad.csv
+desiredfiles = c("prctile90_adresp2ch.csv","prctile90_chresp2ad.csv")
 
 vocaliser = c()
 
@@ -122,7 +134,7 @@ detach(mydata)
 	
 }
 
-setwd("/Users/ritu/Google Drive/research/vocalisation/clean_code_thats_used/csv_files_vfinal/Reported_results") #cd into folder to save into
+# setwd("/Users/ritu/Google Drive/research/vocalisation/clean_code_thats_used/csv_files_vfinal/Reported_results") #cd into folder to save into
 
 prctile90_stats <- list(as.data.frame(vocaliser), 
  as.data.frame(dpdt_var),
