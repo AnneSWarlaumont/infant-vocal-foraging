@@ -55,65 +55,57 @@ for (i in 1:length(desiredfiles)){ #initiate for loop to read all .csv files
 	mydata$id = as.factor(mydata$id)
 	mydata$response = as.factor(mydata$response)
 	
-if ((dim(ss)[1] == 3)&(strcmp(ss[3],"stepsizes.csv") == TRUE)) { #for all lena stepsizes
-	
-	mydata_lmer_model = glmer(response ~ (1|id) + scale(infantage) + scale(frequency) + scale(amplitude)  + scale(freq_dist) + scale(amp_dist)  + scale(time_dist), data = mydata, family=binomial())
-	
-	vocaliser[i] <- ss[1] #gets chresp2ad, adresp2ch etc.
-	measure[i] <- 'stepsizes' 
-		
-	age_effect[i] <- summary(mydata_lmer_model)$coefficients [2,1]
-	age_pval[i] <- summary(mydata_lmer_model)$coefficients [2,4]
-	
-	freq_effect[i] <- summary(mydata_lmer_model)$coefficients [3,1]
-	freq_pval[i] <- summary(mydata_lmer_model)$coefficients [3,4]	
-	
-	amp_effect[i] <- summary(mydata_lmer_model)$coefficients [4,1]
-	amp_pval[i] <- summary(mydata_lmer_model)$coefficients [4,4]
-	
-	freqst_effect[i] <- summary(mydata_lmer_model)$coefficients [5,1]
-	freqst_pval[i] <- summary(mydata_lmer_model)$coefficients [5,4]	
-	
-	ampst_effect[i] <- summary(mydata_lmer_model)$coefficients [6,1]
-	ampst_pval[i] <- summary(mydata_lmer_model)$coefficients [6,4]
-	
-	timst_effect[i] <- summary(mydata_lmer_model)$coefficients [7,1]
-	timst_pval[i] <- summary(mydata_lmer_model)$coefficients [7,4]
-	
-	
+  if ((dim(ss)[1] == 3)&(strcmp(ss[3],"stepsizes.csv") == TRUE)) { #for all lena stepsizes
+  	
+  	mydata_lmer_model = glmer(response ~ (1|id) + scale(infantage) + scale(frequency) + scale(amplitude)  + scale(freq_dist) + scale(amp_dist)  + scale(time_dist), data = mydata, family=binomial())
+  	
+  	vocaliser[i] <- ss[1] #gets chresp2ad, adresp2ch etc.
+  	measure[i] <- 'stepsizes' 
+  		
+  	age_effect[i] <- summary(mydata_lmer_model)$coefficients [2,1]
+  	age_pval[i] <- summary(mydata_lmer_model)$coefficients [2,4]
+  	
+  	freq_effect[i] <- summary(mydata_lmer_model)$coefficients [3,1]
+  	freq_pval[i] <- summary(mydata_lmer_model)$coefficients [3,4]	
+  	
+  	amp_effect[i] <- summary(mydata_lmer_model)$coefficients [4,1]
+  	amp_pval[i] <- summary(mydata_lmer_model)$coefficients [4,4]
+  	
+  	freqst_effect[i] <- summary(mydata_lmer_model)$coefficients [5,1]
+  	freqst_pval[i] <- summary(mydata_lmer_model)$coefficients [5,4]	
+  	
+  	ampst_effect[i] <- summary(mydata_lmer_model)$coefficients [6,1]
+  	ampst_pval[i] <- summary(mydata_lmer_model)$coefficients [6,4]
+  	
+  	timst_effect[i] <- summary(mydata_lmer_model)$coefficients [7,1]
+  	timst_pval[i] <- summary(mydata_lmer_model)$coefficients [7,4]
+  	
 	} else if ((dim(ss)[1] == 2)&(strcmp(ss[2],"logisticreg.csv") == TRUE)) { #for all lena, no stepsizes
-		
-	mydata_lmer_model = glmer(response ~ (1|id) + scale(infantage) + scale(frequency) + scale(amplitude), data = mydata, family=binomial())
-	
-	vocaliser[i] <- ss[[1]] [1] #gets chresp2ad, adresp2ch etc.
-	measure[i] <- 'pitch and amp only' 
-	
-	age_effect[i] <- summary(mydata_lmer_model)$coefficients [2,1]
-	age_pval[i] <- summary(mydata_lmer_model)$coefficients [2,4]
-	
-	freq_effect[i] <- summary(mydata_lmer_model)$coefficients [3,1]
-	freq_pval[i] <- summary(mydata_lmer_model)$coefficients [3,4]	
-	
-	amp_effect[i] <- summary(mydata_lmer_model)$coefficients [4,1]
-	amp_pval[i] <- summary(mydata_lmer_model)$coefficients [4,4]
-	
-	freqst_effect[i] <- '-'
-	freqst_pval[i] <- '-'	
-	
-	ampst_effect[i] <- '-'
-	ampst_pval[i] <- '-'
-	
-	timst_effect[i] <- '-'
-	timst_pval[i] <- '-'	
-		
-
-
+  		
+  	mydata_lmer_model = glmer(response ~ (1|id) + scale(infantage) + scale(frequency) + scale(amplitude), data = mydata, family=binomial())
+  	
+  	vocaliser[i] <- ss[[1]] [1] #gets chresp2ad, adresp2ch etc.
+  	measure[i] <- 'pitch and amp only' 
+  	
+  	age_effect[i] <- summary(mydata_lmer_model)$coefficients [2,1]
+  	age_pval[i] <- summary(mydata_lmer_model)$coefficients [2,4]
+  	
+  	freq_effect[i] <- summary(mydata_lmer_model)$coefficients [3,1]
+  	freq_pval[i] <- summary(mydata_lmer_model)$coefficients [3,4]	
+  	
+  	amp_effect[i] <- summary(mydata_lmer_model)$coefficients [4,1]
+  	amp_pval[i] <- summary(mydata_lmer_model)$coefficients [4,4]
+  	
+  	freqst_effect[i] <- '-'
+  	freqst_pval[i] <- '-'	
+  	
+  	ampst_effect[i] <- '-'
+  	ampst_pval[i] <- '-'
+  	
+  	timst_effect[i] <- '-'
+  	timst_pval[i] <- '-'	
 	
 	}
-
-
-
-
 
 }
 
