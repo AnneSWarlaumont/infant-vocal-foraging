@@ -7,11 +7,25 @@ library(lmerTest)
 
 # Set the working directory to the directory containing the csv file
 # Modify the line below for your own file system
-setwd("/Users/ritu/Google Drive/research/vocalisation/clean_code_thats_used/csv_files_vfinal")
+# setwd("/Users/ritu/Google Drive/research/vocalisation/clean_code_thats_used/csv_files_vfinal")
+# desiredfiles = dir(path=".", pattern="*stepsizedist.csv") #only files that end with stepsizedist.csv
+# source("/Users/ritu/Google Drive/research/vocalisation/clean_code_thats_used/codes_Github_vfinal/stats_R_and_matlab/newest_code/makenewdf_stepsiparam_lmer.R") #source the function to process mydata into new dataframe for analysis
 
-source("/Users/ritu/Google Drive/research/vocalisation/clean_code_thats_used/codes_Github_vfinal/stats_R_and_matlab/newest_code/makenewdf_stepsiparam_lmer.R") #source the function to process mydata into new dataframe for analysis
+# Or, get the files from OSF (https://osf.io/8ern6/files/
+# You will need the osfr package, https://centerforopenscience.github.io/osfr/)
+# To get set up, run the following three lines of code:
+# install.packages("remotes")
+# library(remotes)
+# remotes::install_github("centerforopenscience/osfr")
+library(osfr)
+# If needed, modify the line below for your own file system
+setwd("~/Downloads")
+osf_retrieve_file("https://osf.io/ty9qz/") %>% osf_download() # Downloads adresp2ch_stepsizedist.csv
+osf_retrieve_file("https://osf.io/mkw3z/") %>% osf_download() # Downloads chr2ad_stepsizedist.csv
+desiredfiles = c("adresp2ch_stepsizedist.csv","chr2ad_stepsizedist.csv")
+library(devtools) # run install.packages("devtools") first if you do not already have it installed
+source_url("https://github.com/AnneSWarlaumont/infant-vocal-foraging/blob/master/Analyses/stats_R_and_matlab/makenewdf_stepsiparam_lmer.R?raw=TRUE")
 
-desiredfiles = dir(path=".", pattern="*stepsizedist.csv") #only files taht start with median
 
 vocaliser = c()
 
@@ -129,7 +143,7 @@ detach(mydata)
 
 }
 
-setwd("/Users/ritu/Google Drive/research/vocalisation/clean_code_thats_used/csv_files_vfinal/Reported_results") #cd into folder to save into
+# setwd("/Users/ritu/Google Drive/research/vocalisation/clean_code_thats_used/csv_files_vfinal/Reported_results") #cd into folder to save into
 
 stsiparam_stats <- list(as.data.frame(vocaliser), 
  as.data.frame(dpdt_var),
