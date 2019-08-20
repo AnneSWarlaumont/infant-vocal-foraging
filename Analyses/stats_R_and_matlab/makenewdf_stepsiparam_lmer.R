@@ -2,8 +2,8 @@
 #function to generate dataframe with only best fit type parameters
 #for eg, if we were doing lmer stats for step size distributions in frequency dimension, then only distributions best fit to an exponential would be considered
 
-makenewdf_stepsiparam_lmer <- function(mydata,dpdtvar,dpdtvar_index) { #we make a new data frame to perform analyses on (for step size distance parameters). Depending on which dependent variable we are analynig
-	#(input dpdtvar), we filter based on which distributions are best fit to the majority fit type distribution. dpdtvar_index is used to pick out the dependent variable from the fitered dataframe
+makenewdf_stepsiparam_lmer <- function(mydata,dpdtvar,dpdtvar_index) { #we make a new data frame to perform analyses on (for step size distance parameters). Depending on which dependent variable we are analyzing
+	#(input dpdtvar), we filter based on which distributions are best fit to the majority fit type distribution. dpdtvar_index is used to pick out the dependent variable from the filtered dataframe
 	
 	name_of_dpdt = colnames(dpdtvar) #get name of dependent variable
 	
