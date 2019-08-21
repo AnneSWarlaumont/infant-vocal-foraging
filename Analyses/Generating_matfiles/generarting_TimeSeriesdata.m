@@ -71,7 +71,7 @@ for i  = 1:length(newfilenamesfromfolder)
             ss = seg(j);
             
             %once we match that, we import the data from that file
-            aa = readtable(filenames{i}); 
+            aa = readtable(filenames{i},'delimiter',',');
             headers = aa.Properties.VariableNames;
             if strcmp(headers{2},'speaker') == 1 %make sure that the table is read in correctly - that headers exist
             
@@ -99,7 +99,7 @@ for i  = 1:length(newfilenamesfromfolder)
                 %size(db) %- this serves as a check to see if the size of each
                 %dataset is the same - uncomment for check
                 %Note that we are not removing NaN values and will write
-                %appropriate code to deal with them during analyeses
+                %appropriate code to deal with them during analyses
 
                 start_all{i} = starttime; % _all indicates all speaker types from time series data
                 end_all{i} = endtime;
@@ -150,6 +150,10 @@ for i  = 1:length(newfilenamesfromfolder)
     
 end
 
+%The bug below was fixed by Anne adding 'delimiter' ',' to readtable. Keeping
+%the comment in as the data on OSF were run with earlier version and had
+%the hand-editing Ritwika describes below.
+%
 %Note that a few datasets get read in scrambled - I have chosen to fill
 %these in manually using the following: (change i as necessary) (first open
 %corresponding dataset and import)
@@ -185,7 +189,7 @@ end
 % segm(i)
 
 %save everything
-%save('datachn_raw.mat','start_ch','end_ch','logf_ch','d_ch','start_all','end_all','logf_all','d_all','id','segm','age')
+save('datachn_raw.mat','start_ch','end_ch','logf_ch','d_ch','start_all','end_all','logf_all','d_all','id','segm','age')
 
 
 
