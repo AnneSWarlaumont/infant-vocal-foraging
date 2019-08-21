@@ -21,7 +21,7 @@ clc
 % from OSF, at https://osf.io/zn2jw/
 % and that you have unzipped it
 % and that the resulting folder is in a "Downloads" folder in your home directory
-cd '~/Downloads/postitsfiles_foraging_for_rvps'
+cd '~/Downloads/postitsfiles_foraging_for_rvps';
 
 % cd '/Users/ritu/Google
 % Drive/research/vocalisation/clean_code_thats_used/data/postitsfiles_foraging_for_rvpm/TS' % Ritwika's path
@@ -33,7 +33,9 @@ ageindays = tbl.ageindays; %child age
 name = tbl.filebase; %file base name
 seg = tbl.subrecnum; %subrecording number
 
-aa1 = dir ('TS/*.csv'); %get all files from the folder - all TS files - have to be in the TS folder
+cd 'TS';
+
+aa1 = dir ('*.csv'); %get all files from the folder - all TS files - have to be in the TS folder
 
 %get filenames 
 for i  = 1:length(aa1)
@@ -73,67 +75,67 @@ for i  = 1:length(newfilenamesfromfolder)
             headers = aa.Properties.VariableNames;
             if strcmp(headers{2},'speaker') == 1 %make sure that the table is read in correctly - that headers exist
             
-            %size(aa) - this serves as a check to see if the size of each
-            %dataset is the same - uncomment for check
-          
-            spkr = aa.speaker;
-            starttime = aa.start;
-            endtime = aa.xEnd;
-            freq = aa.meanf0;
-            
-            %check if freq and db are cells, and the values are strings. If yes, convert the string
-            %values to numerical values
-            if iscell(freq) == 1
-            if isstr(freq{1})  == 1
-                freq = str2double(freq);
-            end
-            end
-            db = aa.dB;
-            if iscell(db) == 1
-            if isstr(db{1})  == 1
-                db = str2double(db);
-            end
-            end
-            %size(db) %- this serves as a check to see if the size of each
-            %dataset is the same - uncomment for check
-            %Note that we are not removing NaN values and will write
-            %appropriate code to deal with them during analyeses
-            
-            start_all{i} = starttime; % _all indicates all speaker types from time series data
-            end_all{i} = endtime;
-            logf_all{i} = log(freq);
-            d_all{i} = db;
-            
-            %match to CHNSP labels %stores data
-            start_ch{i} = starttime(strcmp(spkr,'CHNSP') == 1); % _ch indicates CHNSP speaker types only
-            end_ch{i} = endtime(strcmp(spkr,'CHNSP') == 1);
-            f_ch{i} = freq(strcmp(spkr,'CHNSP') == 1);
-            logf_ch{i} = log(f_ch{i});
-            d_ch{i} = db(strcmp(spkr,'CHNSP') == 1);
-            
-            age(i) = ageindays(j);
-            id(i) = id_ch(j); %stores as a string
-            segm(i) = ss; %subrecording number - so 2nd segement in a day will have seg = 2
+                %size(aa) - this serves as a check to see if the size of each
+                %dataset is the same - uncomment for check
+
+                spkr = aa.speaker;
+                starttime = aa.start;
+                endtime = aa.xEnd;
+                freq = aa.meanf0;
+
+                %check if freq and db are cells, and the values are strings. If yes, convert the string
+                %values to numerical values
+                if iscell(freq) == 1
+                    if isstr(freq{1})  == 1
+                        freq = str2double(freq);
+                    end
+                end
+                db = aa.dB;
+                if iscell(db) == 1
+                    if isstr(db{1})  == 1
+                        db = str2double(db);
+                    end
+                end
+                %size(db) %- this serves as a check to see if the size of each
+                %dataset is the same - uncomment for check
+                %Note that we are not removing NaN values and will write
+                %appropriate code to deal with them during analyeses
+
+                start_all{i} = starttime; % _all indicates all speaker types from time series data
+                end_all{i} = endtime;
+                logf_all{i} = log(freq);
+                d_all{i} = db;
+
+                %match to CHNSP labels %stores data
+                start_ch{i} = starttime(strcmp(spkr,'CHNSP') == 1); % _ch indicates CHNSP speaker types only
+                end_ch{i} = endtime(strcmp(spkr,'CHNSP') == 1);
+                f_ch{i} = freq(strcmp(spkr,'CHNSP') == 1);
+                logf_ch{i} = log(f_ch{i});
+                d_ch{i} = db(strcmp(spkr,'CHNSP') == 1);
+
+                age(i) = ageindays(j);
+                id(i) = id_ch(j); %stores as a string
+                segm(i) = ss; %subrecording number - so 2nd segement in a day will have seg = 2
 
 
             else %if headers don't exist, we leave that blank and fill those in manually later
             
-            start_all{i} = {};
-            end_all{i} = {};
-            logf_all{i} = {};
-            d_all{i} = {};
-            
-            start_ch{i} = {};
-            end_ch{i} = {};
-            f_ch{i} = {};
-            logf_ch{i} = {};
-            d_ch{i} = {};
-            
-            age(i) = ageindays(j);
-            id(i) = id_ch(j); %stores as a string
-            segm(i) = ss;
-            filenames{i} %to see which filenames are read in as scrambled and need to be manually entered
-            i %indices of those
+                start_all{i} = {};
+                end_all{i} = {};
+                logf_all{i} = {};
+                d_all{i} = {};
+
+                start_ch{i} = {};
+                end_ch{i} = {};
+                f_ch{i} = {};
+                logf_ch{i} = {};
+                d_ch{i} = {};
+
+                age(i) = ageindays(j);
+                id(i) = id_ch(j); %stores as a string
+                segm(i) = ss;
+                filenames{i} %to see which filenames are read in as scrambled and need to be manually entered
+                i %indices of those
             end
 
          clear speaker
