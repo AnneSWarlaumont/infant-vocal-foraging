@@ -2,7 +2,7 @@
 
 %This is the first .m file that should be run - it generates all the LENA
 %labelled data used in subsequent analyses based on the time series data
-%from LENA. Time series (TS) data only contains speake rtypes CHNSP, FAN, and
+%from LENA. Time series (TS) data only contains speaker types CHNSP, FAN, and
 %MAN. We get speaker id, start and stop times of vocalisations, duration of vocalisations, mean pitch
 %and amplitude of vocalisations. These details are extracted for further
 %analyses.
@@ -17,7 +17,14 @@ clear all
 clc
 
 %cd into relevant folder 
-cd '/Users/ritu/Google Drive/research/vocalisation/clean_code_thats_used/data/postitsfiles_foraging_for_rvpm/TS'
+% Assuming you have downloaded "postitsfiles_foraging_for_rvps.zip"
+% from OSF, at https://osf.io/zn2jw/
+% and that you have unzipped it
+% and that the resulting folder is in a "Downloads" folder in your home directory
+cd '~/Downloads/postitsfiles_foraging_for_rvps'
+
+% cd '/Users/ritu/Google
+% Drive/research/vocalisation/clean_code_thats_used/data/postitsfiles_foraging_for_rvpm/TS' % Ritwika's path
 
 %get all filenames from metadata
 tbl = readtable('metanopauses_foraging_simplified.txt');
@@ -26,7 +33,7 @@ ageindays = tbl.ageindays; %child age
 name = tbl.filebase; %file base name
 seg = tbl.subrecnum; %subrecording number
 
-aa1 = dir ('*.csv'); %get all files from the folder - all TS files - have to be in the TS folder
+aa1 = dir ('TS/*.csv'); %get all files from the folder - all TS files - have to be in the TS folder
 
 %get filenames 
 for i  = 1:length(aa1)
@@ -52,7 +59,7 @@ for i  = 1:length(newfilenamesfromfolder)
     
     filefromfolder = newfilenamesfromfolder{i};
    
-    %Run through file names form metadata
+    %Run through file names from metadata
     for j = 1:length(name)
         
         fntxt = name{j};
