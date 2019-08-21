@@ -189,10 +189,27 @@ end
 % segm(i)
 
 %save everything
+cd ../..
 save('datachn_raw.mat','start_ch','end_ch','logf_ch','d_ch','start_all','end_all','logf_all','d_all','id','segm','age')
 
-
-
+% find the recording(s) whose file names appear more than once in the
+% metadata:
+for j = 1:length(name)
+    namej = strcat(name{j},'_',num2str(seg(j)));
+    for k = 1:length(name)
+        namek = strcat(name{k},'_',num2str(seg(k)));
+        if j~=k & strcmp(namej,namek)
+            namej
+        end
+    end
+end
+% It turned out that e20110820_121247_007562_1 and
+% e20110820_121247_007562_2 were assigned to both SW (with wrong age) and
+% MWW (with correct age). I am pretty sure from this and from looking into
+% other past project records that the file should have been assigned to MWW
+% only. Luckily it seems as though Ritwika processed the data as belonging 
+% to MWW. This bug may also have affected some of Drew Abney's projects. I
+% am not sure how it originated.
        
  
     
