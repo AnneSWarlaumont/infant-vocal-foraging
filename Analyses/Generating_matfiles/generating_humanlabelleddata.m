@@ -46,21 +46,17 @@ for j = 1:length(filetag)
     
     spp = sp{j};
     
-    %this is an option for a more relaxed criterion where any labels that
-    %contain CHN is considered for child vocalisations, and any labels that
-    %contain MAN or FAN are considered for adult vocalisations. This does have
-    %the disadvantage that labels such as MAN, CHN will be counted as both
-    %adult and child vocalisation, which could be an issue when generating
-    %response data (unless you are comfortable with mixed labels and consequent
-    %mixed responses. We chose not to do this)
-    %chexp = '.*CHN.*'; %search for CHN speakers
-    %adexpf = '.*FAN.*'; %searches for adult speakers
-    %adexpm = '.*MAN.*';
+    % search for child speakers only, no CXN, FAN, or MAN
+    % REJ, i.e. "noise, television, unknown" is allowed
+    % for more detail see https://github.com/tim-shea/ivfcr-server/blob/master/speechvisserver/speaker_identification.py
+    chexp = '^(.(?<!CXN|MAN|FAN))*CHN(.(?!CXN|MAN|FAN))*$'; 
     
-    chexp = '^(.(?<!CXN|MAN|FAN))*CHN(.(?!CXN|MAN|FAN))*$'; %search for child speakers only, no CXN, FAN, or MAN;
-    %only additional label allowed is REJ
-    adexpf = '^(.(?<!CXN|MAN|CHN))*FAN(.(?!CXN|MAN|CHN))*$'; %search for FAN only
-    adexpm = '^(.(?<!CXN|FAN|CHN))*MAN(.(?!CXN|FAN|CHN))*$'; %search for MAN only
+    %search for FAN only (REJ allowed)
+    adexpf = '^(.(?<!CXN|MAN|CHN))*FAN(.(?!CXN|MAN|CHN))*$';
+    
+    %search for MAN only (REJ allowed)
+    adexpm = '^(.(?<!CXN|FAN|CHN))*MAN(.(?!CXN|FAN|CHN))*$';
+    
     for k = 1:length(spp)
         cha(k) = regexp(spp(k),chexp);
         adma(k) = regexp(spp(k),adexpm);
