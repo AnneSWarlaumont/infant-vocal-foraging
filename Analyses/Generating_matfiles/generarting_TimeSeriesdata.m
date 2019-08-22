@@ -16,15 +16,14 @@
 clear all
 clc
 
-%cd into relevant folder 
+% cd into relevant folder 
 % Assuming you have downloaded "postitsfiles_foraging_for_rvps.zip"
 % from OSF, at https://osf.io/zn2jw/
 % and that you have unzipped it
 % and that the resulting folder is in a "Downloads" folder in your home directory
 cd '~/Downloads/postitsfiles_foraging_for_rvps';
 
-% cd '/Users/ritu/Google
-% Drive/research/vocalisation/clean_code_thats_used/data/postitsfiles_foraging_for_rvpm/TS' % Ritwika's path
+% cd '/Users/ritu/Google Drive/research/vocalisation/clean_code_thats_used/data/postitsfiles_foraging_for_rvpm/TS' % Ritwika's path
 
 %get all filenames from metadata
 tbl = readtable('metanopauses_foraging_simplified.txt');
