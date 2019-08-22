@@ -36,14 +36,23 @@
 clear all
 clc
 
-%get all filenames from metadata - cd into chresponses folder if necessary
-cd '/Users/ritu/Google Drive/research/vocalisation/clean_code_thats_used/data/postitsfiles_foraging_for_rvpm/chresp'
+% cd into relevant folder 
+% Assuming you have downloaded "postitsfiles_foraging_for_rvps.zip"
+% from OSF, at https://osf.io/zn2jw/
+% and that you have unzipped it
+% and that the resulting folder is in a "Downloads" folder in your home directory
+cd '~/Downloads/postitsfiles_foraging_for_rvps';
 
+% cd '/Users/ritu/Google Drive/research/vocalisation/clean_code_thats_used/data/postitsfiles_foraging_for_rvpm/chresp' % Ritwika's path
+
+%get all filenames from metadata
 tbl = readtable('metanopauses_foraging_simplified.txt');
 id_ch = tbl.id; %stores child id
 ageindays = tbl.ageindays; %child age
 name = tbl.filebase; %file base name
 seg = tbl.subrecnum; %subrecording number
+
+cd 'chresp';
 
 aa1 = dir ('*.txt'); %get all files from the folder - all chresp files files
 
