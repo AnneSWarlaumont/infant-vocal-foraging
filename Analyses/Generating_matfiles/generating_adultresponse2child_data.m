@@ -7,8 +7,7 @@
 % using the responses.pl script. This .m file only gives whether an adult
 % response was received (Y), not received (N), or was not applicable (NA),
 % as well as start and end times of the child vocalisation that the Y, N or
-% NA response is applicable to. We use AdultResponsestoChild files for
-% this. Note that both MAN and FAN speaker types are considered as adult
+% NA response is applicable to. Note that both MAN and FAN speaker types are considered as adult
 % and as such, these files do not contain speaker type details.
 
 %From the manuscript: We also used the timestamps of the automatically
