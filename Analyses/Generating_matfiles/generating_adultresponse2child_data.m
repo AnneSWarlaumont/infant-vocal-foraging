@@ -1,29 +1,37 @@
 %Ritwika, UC Merced
 
-%Generates all the adult response data for child vocalisations based on LENA
-%labelled data. This .m file only gives whether an adult response was received (Y), not received (N),
-% or was not applicable (NA), as well as start and end times of the child
-% vocalisation that the Y, N or NA response is applicable to. 
-% We use AdultResponsestoChild files for this. Note that both MAN and FAN
-% speaker types are considered as adult and as such, these files do not
-% contain speaker type details.
+% Loads in all the adult response data for child vocalisations. The
+% response data are in the AdultResponsesToChild files within the Adresp
+% folder within postitsfiles_foraging_for_rvps (available as a zip file on
+% OSF). Those input files were based on LENA labelled data pre-processed
+% using the responses.pl script. This .m file only gives whether an adult
+% response was received (Y), not received (N), or was not applicable (NA),
+% as well as start and end times of the child vocalisation that the Y, N or
+% NA response is applicable to. We use AdultResponsestoChild files for
+% this. Note that both MAN and FAN speaker types are considered as adult
+% and as such, these files do not contain speaker type details.
 
-%From the manuscript:
-%We also used the timestamps of the automatically obtained vocaliser labels to determine whether 
-%each infant vocalisation was followed within 1 s by an adult vocalisation, in which case we (operationally) 
-%say that the infant vocalisation received a response, and to determine whether each adult vocalisation was 
-%followed within 1 s by an infant vocalisation, in which case we say that the adult vocalisation received a 
-%response. In cases where two infant vocalisations occurred with less than 1 s separation intervening and no adult 
-%vocalisation occupied the intervening time, we marked adult response to the first infant vocalisation as ``not applicable'', 
-%and the same was done for two adult vocalisations occurring with less than 1 s separating intervening and no infant 
-%vocalisation occupying the intervening time (also see figure 1 in the main text)
+%From the manuscript: We also used the timestamps of the automatically
+%obtained vocaliser labels to determine whether each infant vocalisation
+%was followed within 1 s by an adult vocalisation, in which case we
+%(operationally) say that the infant vocalisation received a response, and
+%to determine whether each adult vocalisation was followed within 1 s by an
+%infant vocalisation, in which case we say that the adult vocalisation
+%received a response. In cases where two infant vocalisations occurred with
+%less than 1 s separation intervening and no adult vocalisation occupied
+%the intervening time, we marked adult response to the first infant
+%vocalisation as ``not applicable'', and the same was done for two adult
+%vocalisations occurring with less than 1 s separating intervening and no
+%infant vocalisation occupying the intervening time (also see figure 1 in
+%the main text)
 
 
-%Note that subrecordngs from the same day are not put together into a
-%single file here, to avoid the inclusion of bogus steps (from the end of one subrecording to the beginning of the next, despite there
-% potentially being a large time interval and several unrecorded
-% vocalisations between the two.). We take care of this issue in later data
-% analyses seperately.
+% Note that subrecordngs from the same day are not put together into a
+% single file here, to avoid the inclusion of bogus steps (from the end of
+% one subrecording to the beginning of the next, despite there potentially
+% being a large time interval and several unrecorded vocalisations between
+% the two.). We take care of this issue in later data analyses separately.
+
 clear all
 clc
 
