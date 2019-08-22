@@ -35,15 +35,23 @@
 clear all
 clc
 
-%get all filenames from metadata - cd into adult responses foler if
-%necessary
-cd '/Users/ritu/Google Drive/research/vocalisation/clean_code_thats_used/data/postitsfiles_foraging_for_rvpm/Adresp'
+% cd into relevant folder 
+% Assuming you have downloaded "postitsfiles_foraging_for_rvps.zip"
+% from OSF, at https://osf.io/zn2jw/
+% and that you have unzipped it
+% and that the resulting folder is in a "Downloads" folder in your home directory
+cd '~/Downloads/postitsfiles_foraging_for_rvps';
 
+% cd '/Users/ritu/Google Drive/research/vocalisation/clean_code_thats_used/data/postitsfiles_foraging_for_rvpm/Adresp' % Ritwika's path
+
+%get all filenames from metadata 
 tbl = readtable('metanopauses_foraging_simplified.txt');
 id_ch = tbl.id; %stores child id
 ageindays = tbl.ageindays; %child age
 name = tbl.filebase; %file base name
 seg = tbl.subrecnum; %subrecording number
+
+cd 'Adresp';
 
 aa1 = dir ('*.txt'); %get all files from the folder - all adult resp files
 
@@ -58,11 +66,11 @@ end
 %the first bit is the id - file base-, and the second bit 
 %is the recording segment number
 for i = 1:length(filenames)
-   boo = strsplit(filenames{i},'_AdultResponsesToChild_');
-   
-   bb = strsplit(boo{2},'.txt');
-   boo(2) = bb(1);
-  newfilenames{i} = boo;%stores filenames split into name and subrecording number
+    boo = strsplit(filenames{i},'_AdultResponsesToChild_');
+    
+    bb = strsplit(boo{2},'.txt');
+    boo(2) = bb(1);
+    newfilenames{i} = boo;%stores filenames split into name and subrecording number
 end
 
 %run through through names from folder and try and match to metadata
