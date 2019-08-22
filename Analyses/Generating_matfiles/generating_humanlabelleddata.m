@@ -33,6 +33,9 @@ for i  = 1:length(aa)
 end
 
 
+% Read in the human label data, and identify LENA segments where the human
+% listener said CHN (without CXN, MAN, FAN), MAN (without CHN, CXN, FAN),
+% and FAN (without CHN, CXN, MAN) ocurred
 for j = 1:length(filetag)
     
     clear cha adma adfa newsp
@@ -68,7 +71,9 @@ for j = 1:length(filetag)
     mantag{j} = adma;
 end
 
-%now, we need to sort this into child speaker and adult speaker
+% Now, we need to sort this into child speaker and adult speaker. Create
+% separate variables for child and adult data, preserving child ID and
+% start time (start time allows matching to LENA-labelled data).
 for i = 1:length(filetag)
     spp = sp{i};
     ch = chntag{i};
@@ -80,13 +85,13 @@ for i = 1:length(filetag)
     counterch = 0;
     counterad = 0;
     for j = 1:length(spp) 
-        if (isempty(cell2mat(fad(j))) == 0) || (isempty(cell2mat(mad(j))) == 0) %for adult speaker
+        if (isempty(cell2mat(fad(j))) == 0) || (isempty(cell2mat(mad(j))) == 0) %if adult speaker
             counterad = counterad+1; %if either adult speaker present
             adst(counterad) = st(j);
             adid(counterad) = idd(j);
         end
         
-        if isempty(cell2mat(ch(j))) == 0  %for child speaker
+        if isempty(cell2mat(ch(j))) == 0  %if child speaker
             counterch = counterch+1; %if child speaker present
             chst(counterch) = st(j);
             chid(counterch) = idd(j);
@@ -112,15 +117,15 @@ counterj = 0;
 for i = 1:length(filetag) %we have the three separate ids of the form {human listener,IVFCR<childid>}. eg: L1, IVFCR274
     uniqid = unique(childid{i}); %finds unique childid
     for j = 1:length(uniqid)
-    counterj = counterj+1;
-    idmat{counterj,1} = filetag{i};
-    idmat{counterj,2} = uniqid{j};
-    idmat{counterj,3} = aages(counterj);
+        counterj = counterj+1;
+        idmat{counterj,1} = filetag{i};
+        idmat{counterj,2} = uniqid{j};
+        idmat{counterj,3} = aages(counterj);
     end
 end
 
 %Now, we need to sort the adstart and chstart matrices into these ids of the form {human listener,IVFCR<childid>}
-%thsi is because some human listeners listened to multiple infant id data,
+%this is because some human listeners listened to multiple infant id data,
 %and all of that is in a single file labelled by the human listener id
 
 for i = 1:length(idmat)
@@ -140,8 +145,10 @@ end
 %to get labels that match the automatedd ata, and the db and f values. In
 %doing this, we will keep the subrecordings separate
 
-
-load('data_zkm.mat')
+% Assuming you have downloaded "data_zkm.mat" from OSF, at
+% https://osf.io/bf9vr/ or have generated it yourself and that the
+% resulting folder is in a "Downloads" folder in your home directory
+load('~/Downloads/data_zkm.mat')
 
 datafactch_count = 0;
 
