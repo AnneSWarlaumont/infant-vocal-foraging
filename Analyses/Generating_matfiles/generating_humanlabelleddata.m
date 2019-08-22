@@ -1,10 +1,11 @@
- %Ritwika, UC merced
+%Ritwika, UC merced
 clear all
 clc
 
 %Human labelled data contains start time, end time, listener id, child id,
-%speaker type, recording id, and method of labelling (the last two are not relevant to the subsequent data analyses 
-%so we will not be extracting those)
+%speaker type, recording id, and method of labelling (the last two are not
+%relevant to the subsequent data analyses so we will not be extracting
+%those)
 
 %Only vocalisations that has a single speaker type are considered for
 %further analyses. 
@@ -14,55 +15,61 @@ clc
 %L1:340 at 6 months, 274 at 3 months.
 %L2: 530 at 3 months.
 
-%cd into human labelled data folder if necessary
-cd '/Users/ritu/Google Drive/research/vocalisation/clean_code_thats_used/data/human_labels'
+% cd into relevant folder 
+% Assuming you have downloaded "Human_labels" as zip
+% from OSF, at https://osf.io/8ern6/files/
+% and that you have unzipped it
+% and that the resulting folder is in a "Downloads" folder in your home directory
+cd '~/Downloads/Human_labels';
+
+% cd '/Users/ritu/Google Drive/research/vocalisation/clean_code_thats_used/data/human_labels' % Ritwika's path
 
 aa = dir ('*.csv'); %reads all human labelled data - filenames
 %get filenames 
 for i  = 1:length(aa)
-filenames{i} = aa(i).name;
-ff = strsplit(filenames{i},'_Labels.csv');
-filetag{i} = ff{1}; %gets listeners name
+    filenames{i} = aa(i).name;
+    ff = strsplit(filenames{i},'_Labels.csv');
+    filetag{i} = ff{1}; %gets listeners name
 end
 
 
 for j = 1:length(filetag)
     
-clear cha adma adfa newsp  
-da = readtable(filenames{j});
-
-sttime{j} = da.start; %stores starttime, child id, and speaker id
-id{j} = da.child_id; 
-sp{j} = da.speaker;
-
-length(sp{j})
-
-spp = sp{j};
-
-%this is an option for a more relaxed criterion where any labels that
-%contain CHN is considered for child vocalisations, and any labels that
-%contain MAN or FAN are considered for adult vocalisations. This does have
-%the disadvantage that labels such as MAN, CHN will be counted as both
-%adult and child vocalisation, which could be an issue when generating
-%response data (unless you are comfortable with mixed labels and consequent
-%mixed responses. We chose not to do this)
-%chexp = '.*CHN.*'; %search for CHN speakers
-%adexpf = '.*FAN.*'; %searches for adult speakers
-%adexpm = '.*MAN.*';
-
-chexp = '^(.(?<!CXN|MAN|FAN))*CHN(.(?!CXN|MAN|FAN))*$'; %search for child speakers only, no CXN, FAN, or MAN;
-%only additional label allowed is REJ
-adexpf = '^(.(?<!CXN|MAN|CHN))*FAN(.(?!CXN|MAN|CHN))*$'; %search for FAN only
-adexpm = '^(.(?<!CXN|FAN|CHN))*MAN(.(?!CXN|FAN|CHN))*$'; %search for MAN only
-for k = 1:length(spp)
-    cha(k) = regexp(spp(k),chexp);
-    adma(k) = regexp(spp(k),adexpm);
-    adfa(k) = regexp(spp(k),adexpf);
-end
-
-chntag{j} = cha;
-fantag{j} = adfa;
-mantag{j} = adma;
+    clear cha adma adfa newsp
+    da = readtable(filenames{j});
+    
+    sttime{j} = da.start; %stores starttime, child id, and speaker id
+    id{j} = da.child_id;
+    sp{j} = da.speaker;
+    
+    length(sp{j})
+    
+    spp = sp{j};
+    
+    %this is an option for a more relaxed criterion where any labels that
+    %contain CHN is considered for child vocalisations, and any labels that
+    %contain MAN or FAN are considered for adult vocalisations. This does have
+    %the disadvantage that labels such as MAN, CHN will be counted as both
+    %adult and child vocalisation, which could be an issue when generating
+    %response data (unless you are comfortable with mixed labels and consequent
+    %mixed responses. We chose not to do this)
+    %chexp = '.*CHN.*'; %search for CHN speakers
+    %adexpf = '.*FAN.*'; %searches for adult speakers
+    %adexpm = '.*MAN.*';
+    
+    chexp = '^(.(?<!CXN|MAN|FAN))*CHN(.(?!CXN|MAN|FAN))*$'; %search for child speakers only, no CXN, FAN, or MAN;
+    %only additional label allowed is REJ
+    adexpf = '^(.(?<!CXN|MAN|CHN))*FAN(.(?!CXN|MAN|CHN))*$'; %search for FAN only
+    adexpm = '^(.(?<!CXN|FAN|CHN))*MAN(.(?!CXN|FAN|CHN))*$'; %search for MAN only
+    for k = 1:length(spp)
+        cha(k) = regexp(spp(k),chexp);
+        adma(k) = regexp(spp(k),adexpm);
+        adfa(k) = regexp(spp(k),adexpf);
+    end
+    
+    chntag{j} = cha;
+    fantag{j} = adfa;
+    mantag{j} = adma;
 end
 
 %now, we need to sort this into child speaker and adult speaker
