@@ -155,12 +155,17 @@ datafactch_count = 0;
 for i  = 1:length(chst_factch)-1 %ignoring L3's 530 data, because only partly completed
     stst_ch = chst_factch{i};
     for j = 1:length(start_all)
-        if (strcmp(regexp(idmat{i,2},'[0-9]+','match'),id{j}) == 1) && (age(j) == idmat{i,3}) %pick out just the child id from the idmat
+        %pick out just the child id from the idmat, and check whether id
+        %and age for this human-labelled data point match those for
+        %recording j within the id and age variables imported from
+        %data_zkm.mat:
+        if (strcmp(regexp(idmat{i,2},'[0-9]+','match'),id{j}) == 1) && (age(j) == idmat{i,3})
             %Note that we are only finding db and f labels of vocalisations
             %that match the start time - that is, we are not bothering
-            %whetehr the speaker labels match for the human label and LENA
-            [cc,idat,ifact] = intersect(start_all{j},stst_ch); %intersect with matching child ids
-            if isempty(cc) == 0 %find child vocal details
+            %whether the speaker labels match for the human label and LENA
+            [cc,idat,ifact] = intersect(start_all{j},stst_ch); %intersect LENA start times (start_all{j}) with matching human-labelled child start times (stst_ch)
+            %find child vocalisation details:
+            if isempty(cc) == 0
                 datafactch_count = datafactch_count + 1;
                 datachst = start_all{j};
                 datachen = end_all{j};
@@ -175,7 +180,7 @@ for i  = 1:length(chst_factch)-1 %ignoring L3's 530 data, because only partly co
                 chage(datafactch_count) = age(j);
                 listenerid{datafactch_count} = idmat{i,1};
                 childid(datafactch_count) = regexp(idmat{i,2},'[0-9]+','match');
-                speakerseg(datafactch_count) = segm(j);
+                speakerseg(datafactch_count) = segm(j); % subrecording number
                 
             end 
         end    
@@ -190,9 +195,10 @@ datafactch_count = 0;
 for i  = 1:length(adst_factch)-1 %ignoring L3's 530 data
     stst_ad = adst_factch{i};
     for j = 1:length(start_all)
-        if (strcmp(regexp(idmat{i,2},'[0-9]+','match'),id{j}) == 1) && (age(j) == idmat{i,3}) %pick out just the child id from the idmat
-            [cc,idat,ifact] = intersect(start_all{j},stst_ad); %intersect with matching child ids
-            if isempty(cc) == 0 %find child vocal details
+        if (strcmp(regexp(idmat{i,2},'[0-9]+','match'),id{j}) == 1) && (age(j) == idmat{i,3})
+            [cc,idat,ifact] = intersect(start_all{j},stst_ad); %intersect LENA start times (start_all{j}) with matching human-labelled adult start times (stst_ad)
+            %find adult vocalisation details:
+            if isempty(cc) == 0
                 datafactch_count = datafactch_count + 1;
                 datachst = start_all{j};
                 datachen = end_all{j};
@@ -207,7 +213,7 @@ for i  = 1:length(adst_factch)-1 %ignoring L3's 530 data
                 age_adhumlab(datafactch_count) = age(j);
                 listenerid_ad{datafactch_count} = idmat{i,1};
                 childid_ad(datafactch_count) = regexp(idmat{i,2},'[0-9]+','match');
-                speakerseg_ad(datafactch_count) = segm(j);
+                speakerseg_ad(datafactch_count) = segm(j); % subrecording number
 
             end 
         end    
@@ -218,69 +224,76 @@ end
 %as a final step, we need to extract adult/chlid response data based on
 %human labelling
 
-%Now, we get adult response data based on human labels
-
+%First, we get adult responses to child based on human labels:
 for i = 1:length(chst_humlab)
      clear adr 
      sch = chst_humlab{i};
      ech = chen_humlab{i};
      sad = adst_humlab{i};
      ead = aden_humlab{i};
-        %If there is an onset of a vocalization by the responder within 1 s or less from the offset of the initiator. 
-        %If so, a response is said to have occurred. If not, then if the initiator had a vocalization onset within 1 s or 
-        %less from the offset of the initiator, a response is not applicable. Otherwise, a response is said not to have occurred.
-        for j = 1:length(sch)
-            offset1 = ech(j);
-            offset1plus1sec = ech(j) + 1;
-            
-            child_set = sch(sch >= offset1);
-            child_set = child_set(child_set <= offset1plus1sec);
-            
-            adult_set = sad(sad >= offset1);
-            adult_set = adult_set(adult_set <= offset1plus1sec);
-            
-            if isempty(adult_set) == 0 %if responder has a voc
-                adr(j) = 1;
-            elseif isempty(child_set) == 0 %if initiaor has a voc within 1 s
-                adr(j) = 100; %for not applicable
-            elseif isempty(adult_set) == 1 %if neither is applicable
-                adr(j) = 0;
-            end
-        end
-        adresponse_humlab{i} = adr;
-        clear adr
+     %If there is an onset of a vocalization by the responder within 1 s or
+     %less from the offset of the initiator, a response is said to have
+     %occurred. If not, then if the initiator had a vocalization onset
+     %within 1 s or less from the offset of the initiator, a response is
+     %not applicable. Otherwise, a response is said not to have occurred.
+     %Note that this method is slightly different from the method used by
+     %responses.pl, although the two methods are certainly similar.
+     for j = 1:length(sch)
+         offset1 = ech(j);
+         offset1plus1sec = ech(j) + 1;
+         
+         child_set = sch(sch >= offset1);
+         child_set = child_set(child_set <= offset1plus1sec);
+         
+         adult_set = sad(sad >= offset1);
+         adult_set = adult_set(adult_set <= offset1plus1sec);
+         
+         if isempty(adult_set) == 0 %if responder has a voc
+             adr(j) = 1;
+         elseif isempty(child_set) == 0 %if initiator has a voc within 1 s
+             adr(j) = 100; %for not applicable
+         elseif isempty(adult_set) == 1 %if neither is applicable % Anne to Ritwikwa: Wouldn't just else (with no conditional) work here?
+             adr(j) = 0;
+         end
+     end
+     adresponse_humlab{i} = adr;
+     clear adr
 end
 
-%find child responses to adult
+%Now find child responses to adult:
 for i = 1:length(chst_humlab)
      clear chresp
      sch = chst_humlab{i};
      ech = chen_humlab{i};
      sad = adst_humlab{i};
      ead = aden_humlab{i};
-        %If there is an onset of a vocalization by the responder within 1 s or less from the offset of the initiator. 
-        %If so, a response is said to have occurred. If not, then if the initiator had a vocalization onset within 1 s or 
-        %less from the offset of the initiator, a response is not applicable. Otherwise, a response is said not to have occurred.
-        for j = 1:length(sad)
-            offset1 = ead(j);
-            offset1plus1sec = ead(j) + 1;
-            
-            child_set = sch(sch >= offset1);
-            child_set = child_set(child_set <= offset1plus1sec);
-            
-            adult_set = sad(sad >= offset1);
-            adult_set = adult_set(adult_set <= offset1plus1sec);
-            
-            if isempty(child_set) == 0 %if responder has a voc
-                chresp(j) = 1;
-            elseif isempty(adult_set) == 0 %if initiaor has a voc within 1 s
-                chresp(j) = 100; %for not applicable
-            elseif isempty(child_set) == 1 %if neither is applicable
-                chresp(j) = 0;
-            end
-        end
-        chresp2ad_humlab{i} = chresp;
-        clear chresp
+     %If there is an onset of a vocalization by the responder within 1 s or
+     %less from the offset of the initiator, a response is said to have
+     %occurred. If not, then if the initiator had a vocalization onset
+     %within 1 s or less from the offset of the initiator, a response is
+     %not applicable. Otherwise, a response is said not to have occurred.
+     %Note that this method is slightly different from the method used by
+     %responses.pl, although the two methods are certainly similar.
+     for j = 1:length(sad)
+         offset1 = ead(j);
+         offset1plus1sec = ead(j) + 1;
+         
+         child_set = sch(sch >= offset1);
+         child_set = child_set(child_set <= offset1plus1sec);
+         
+         adult_set = sad(sad >= offset1);
+         adult_set = adult_set(adult_set <= offset1plus1sec);
+         
+         if isempty(child_set) == 0 %if responder has a voc
+             chresp(j) = 1;
+         elseif isempty(adult_set) == 0 %if initiator has a voc within 1 s
+             chresp(j) = 100; %for not applicable
+         elseif isempty(child_set) == 1 %if neither is applicable % Anne to Ritwikwa: Wouldn't just else (with no conditional) work here?
+             chresp(j) = 0;
+         end
+     end
+     chresp2ad_humlab{i} = chresp;
+     clear chresp
 end
 
 
