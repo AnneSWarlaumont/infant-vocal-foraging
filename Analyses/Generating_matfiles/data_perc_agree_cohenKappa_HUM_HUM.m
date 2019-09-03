@@ -6,30 +6,33 @@
 %listeners - generate data to use for cohen's kappa and percent agreement
 %analysis (to compare between two human listeenrs for the same - 340 -
 %data)
-clear all
-clc
 
 %We have one vocal dataset that was listened to by two human listeners - we
 %will use this, infant 340, to test interraterreliabilty between the two
 %human listeners
 
-%human listeners listened to sounds which had labels FAN, MAN,
-%,CXN, and CHNSP and CHNNSP (both labelled as CHN by human listeners) according to LENA. In addition, human listeners sometimes
-%(presumably) skipped some portion of the recordings (this part needs
-%clarification from Tim). However, we only used CHNSP, MAN and FAN data in our
-%analysis of LENA data. Hence, since we are only interested in the human listenrs' 
-%reliability when it comes to CHNSP, MAN and FAN data, we will proceed as follows:
+%Human listeners listened to sounds which had labels FAN, MAN, CXN, CHNSP,
+%and CHNNSP according to LENA. In addition, human listeners sometimes
+%skipped some portion of the recordings and although the labelling program
+%was supposed to take them back to those we think there was a bug such that
+%that did not always happen. However, we only used CHNSP, MAN and FAN data
+%in our analysis of LENA data. Hence, since we are only interested in the
+%human listenrs' reliability when it comes to CHNSP, MAN and FAN data, we
+%will proceed as follows:
 
 %First, we will isolate CHN, MAN and FAN labels from labels by both human
-%listeners for infant 340. We will then retrieve CHNSP, MAN, FAN labels from 
-%LENA-labelled segments. Then since human CHN labels include both CHNSP and CHNNSP,
-%and we are only interested in reliabilty for CHNSP, MAN, and FAN labels,
-%we will match start times from the LENA segment labels extracted before (thsi also
-%works because all human labelled data analyses are carried out on start times
-%matched to relevant LENA labels). 
+%listeners for infant 340. We will then retrieve CHNSP, MAN, FAN labels
+%from LENA-labelled segments. Then since human CHN labels include both
+%CHNSP and CHNNSP, and we are only interested in reliabilty for CHNSP, MAN,
+%and FAN labels, we will match start times from the LENA segment labels
+%extracted before (this also works because all human labelled data analyses
+%are carried out on start times matched to relevant LENA labels).
 
 %Finally, to compare with each other, the human labelled datasets
-%themselves should only be compared for matching start times. 
+%themselves should only be compared for matching start times.
+
+clear all
+clc
 
 %cd to folder with the segments file from LENA
 cd '/Users/ritu/Google Drive/research/vocalisation/clean_code_thats_used/data/postitsfiles_foraging_for_rvpm/seg'
