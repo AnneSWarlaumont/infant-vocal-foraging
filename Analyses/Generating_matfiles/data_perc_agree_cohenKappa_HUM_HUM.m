@@ -3,7 +3,7 @@
 %June 2019
 
 %IVFCR code - to find LENA labelled data that has been labelled by human
-%listeners - generate data to use for cohen's kappa and percent agreemenr
+%listeners - generate data to use for cohen's kappa and percent agreement
 %analysis (to compare between two human listeenrs for the same - 340 -
 %data)
 clear all
