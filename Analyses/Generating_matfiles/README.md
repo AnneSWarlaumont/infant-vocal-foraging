@@ -13,6 +13,6 @@ v) **generating_humanlabelleddata.m** extracts the speaker id as determined by a
 
 vi) **data_perc_agree_cohenKappa_HUM_LENA.m** generates interraterreliability measures for human labelled data wrt corresponding LENA data (percent agreement, Cohen's Kappa, confusion matrices). This uses the cohensKappa.m file by Elliot Layden, so make sure a folder containing that file is in the path (see comments in code for details).
 
-vii) **data_perc_agree_cohenKappa_HUM_HUM.m** generates interraterreliability measures for data from infant 340 at age 183 days labelled by listeners 1 and 3 (percent agreement, Cohen's Kappa, confusion matrices). This uses a user-defined MATLAB function in the stats folder, so make sure the stats folder is in the path.  
+vii) **data_perc_agree_cohenKappa_HUM_HUM.m** generates interraterreliability measures for data from infant 340 at age 183 days labelled by listeners 1 and 3 (percent agreement, Cohen's Kappa, confusion matrices). This uses the cohensKappa.m file by Elliot Layden, so make sure a folder containing that file is in the path.
 
-viii) **LENA_vs_HUM_labels_proportions.m** generates tables for human labelled data and corresponding LENA labelled data, describing what proportion of each LENA label type of our interest (CHNSP, MAN, FAN) falls into human-labelled categories of our interest. (Table S11 in SI)
+viii) **LENA_vs_HUM_labels_proportions.m** generates tables for human labelled data and corresponding LENA labelled data, describing what proportion of each LENA label type of our interest (CHNSP, MAN, FAN) falls into human-labelled categories of our interest. (See Table S11 in SI.)
