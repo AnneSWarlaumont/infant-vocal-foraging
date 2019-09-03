@@ -3,40 +3,51 @@
 %November 28, 2018
 
 %IVFCR code - to find LENA labelled data that has been labelled by human
-%listeners - generate data to use for cohen's kappa and percent agreemenr
+%listeners - generate data to use for cohen's kappa and percent agreement
 %analysis (to compare between human and LENA listeners)
+
+%we have 3 sets of lena labelled data that were labelled by human
+%listeners. Human listeners listened to sounds which had labels FAN, MAN,
+%CXN, CHNSP, and CHNNSP according to LENA. In addition, human listeners
+%sometimes skipped some portion of the recordings and although the
+%labelling program was supposed to take them back to those we think there
+%was a bug such that that did not always happen. We only used CHNSP, MAN
+%and FAN data in our analysis of LENA data. So, in this code, we go back to
+%the LENA-based files to identify all LENA-identified CHNSP, FAN and MAN
+%labels from each human-labelled recording, and then we compare start times
+%to see which of these were actually labelled by human listeners.
+
+%The human labelling did not distinguish between CHNSP (speech-related
+%vocalization by the child wearing the recorder) and CHNNSP (cry, laugh, or
+%vegetative vocalization by the child wearing the recorder). Because we do
+%not have a plausible way to seperate CHN labels by human listeners into
+%CHNSP and CHNNSP without relying on LENA labels, we will rely on LENA to
+%determine if a human-labelled CHN was CHNSP and CHNNSP. Segments labeled
+%CHN by a human will be labelled CHNSP if LENA labelled them as CHNSP, MAN,
+%or FAN. Otherwise, i.e. if LENA labelled the segment as CXN or CHNNSP, the
+%human-labelled CHN will be excluded from analyses.
+
+%So, this will be our approach: We will isolate only vocs labelled by human
+%as MAN, FAN or CHN AND not given multiple labels by human listerns (REJ,
+%i.e. Reject due to other noise, is ok because otherwise almost all data
+%will be eliminated; see further down in the code for examples). We will
+%then match start times between the CHNSP, MAN, and FAN LENA-labelled
+%segments from the recording to human listener segments labelled MAN,
+%CHNSP, or FAN with no other human voices identified. We then compare the
+%LENA vs. human listener labels for each corresponding segment pair for
+%inter-rater reliability.
+
 clear all
 clc
 
-%we have 3 sets of lena labelled data that were labelled by human
-%listeners. However, human listeners listened to sounds which had labels FAN, MAN,
-%,CXN, and CHNSP and CHNNSP (both labelled as CHN by human listeners) according to LENA. In addition, human listeners sometimes
-%(presumably) skipped some portion of the recordings (this part needs
-%clarification from Tim). However, we only used CHNSP, MAN and FAN data in our
-%analysis of LENA data. So, in this code, we go back to the larger
-%segments files to identify all CHNSP, FAN and MAN labels from
-%LENA for the specific datasets, and then compare start times to see which
-%of these were actually labelled by human listeners. 
-
-%(presumably) both CHNSP and CHNNSP labels from LENA are
-%encoded as CHN by human listeners. Because we do not have a plausible way
-%to seperate CHN labels by human listeners into CHNSP and CHNNSP without
-%relying on LENA labels, we will use human listener labels to identify 
-%which vocalisations were id'd as adult and child by the human listener.
-%We will rely on LENA to determine if a CHN label was CHNSP and CHNNSP.
-%So, this will be our approach: We will isolate only vocs labelled as MAN, FAN or CHN
-%AND are not given multiple labels by human listerns (REJ is ok; see further down in the code for examples).
-%We will then match start times of the 
-%subset isolated from LENA (CHNSP, MAN, FAN) and human listener (MAN, CHN, FAN; no multiple labels)
-% and then compare the labels for each corresponding LENA-human listener label pair for inter-rater
-%reliability. All CHN labels by human listeners devoid
-%of multiple spekaer labels will be recoded as CHNSP. By matching start
-%time of human labelled data (now the speaker labels are recoded as CHNSP, MAN, FAN, and only labels with a single speaker
-%type are included) to start time of LENA data labelled CHNSP, MAN or FAN,
-%we will eliminate most of the CHNNSP labelled as CHN by human listeners. 
-
-%cd to folder with the segments file from LENA
-cd '/Users/ritu/Google Drive/research/vocalisation/clean_code_thats_used/data/postitsfiles_foraging_for_rvpm/seg'
+%cd to folder with the segments file from LENA 
+% Assuming you have downloaded "postitsfiles_foraging_for_rvps.zip"
+% from OSF, at https://osf.io/zn2jw/
+% and that you have unzipped it
+% and that the resulting folder is in a "Downloads" folder in your home directory
+cd '~/Downloads/postitsfiles_foraging_for_rvps/seg';
+% cd '/Users/ritu/Google
+% Drive/research/vocalisation/clean_code_thats_used/data/postitsfiles_foraging_for_rvpm/seg' % Ritwika's path
 
 %since there are only 3 infant datsets that have been labelled by humans, I
 %found it easier to list them up rather than creating a text file with the
@@ -51,9 +62,7 @@ cd '/Users/ritu/Google Drive/research/vocalisation/clean_code_thats_used/data/po
 inf_274_82days = readtable('0274_000221_Segments1.txt');
 inf_340_183days = readtable('0340_000601_Segments1.txt');
 
-%infant 530 at 95 days has multiple segments so we will use dir to extract
-%that 
-
+%infant 530 at 95 days has multiple segments so we will use dir
 %pick out all files that are segments for infant 530 at 95 days
 aa = dir('0530_000304*.txt');
 inf_530_95days = [];
@@ -97,21 +106,27 @@ for i = 1:length(lena_data)
     
 end
 
-%cd to folder with human labels
-cd '/Users/ritu/Google Drive/research/vocalisation/clean_code_thats_used/data/human_labels'
+% cd to folder with human labels
+% Assuming you have downloaded "Human_labels" as zip
+% from OSF, at https://osf.io/8ern6/files/
+% and that you have unzipped it
+% and that the resulting folder is in a "Downloads" folder in your home directory
+cd '~/Downloads/Human_labels';
+% cd '/Users/ritu/Google Drive/research/vocalisation/clean_code_thats_used/data/human_labels' % Ritwika's path
 
 hum = dir('*.csv');
 
 %now, we need to match the data in hum to the LENA labelled data by infant
 %id. We also need to isolate listener id. Then, we will compare start times
 %from, for example infant 530 at 95 days, from the LENA data and human
-%labelled data to see which segements were abelled by the human listeners.
+%labelled data to see which segements were labelled by the human listeners.
 %We will also store the speaker type as identified by LENA and human
-%listener, and thsi will the final output file.
+%listener, and this will the final output file.
 
-%headres in human labelled files: start, end (MATLAB will change this to
-%end1 or end<a number> to make it a valid MATLAB identifier), recording_id,
-%child_id, speaker (as identified by human listener), coder, method. 
+%headers in human labelled files: start, end (MATLAB will change this to
+%end1 or end<a number> or xend to make it a valid MATLAB identifier),
+%recording_id, child_id, speaker (as identified by human listener), coder,
+%method.
 
 %We will use child_id to match child id, coder to match listener, and start
 %to match start times
@@ -143,12 +158,12 @@ for i = 1:length(hum_data)
     
     spsp = temp_data_table.speaker; %note that this is a vertical array of cell arrays
     
-    %rrelabelling of speaker labels
+    %relabelling of speaker labels
     for k = 1:length(spsp)
         if isempty(regexp(spsp{k},chexp)) == 0 %check if result of regexp is empty -> if empty, there is no match
             newspsp{k} = 'CHNSP'; %note that at this point not all relabelled CHNSP labels in human 
             %labelled data arent CHNSP - some of them might be CHNNSP.
-            %Further in thsi process, we will use LENA labelled data to
+            %Further in this process, we will use LENA labelled data to
             %filter CHNSP from CHNNSP
         elseif isempty(regexp(spsp{k},adexpf)) == 0
             newspsp{k} = 'FAN';
@@ -162,14 +177,14 @@ for i = 1:length(hum_data)
     temp_data_table.speaker = transpose(newspsp); %assigns the new labels for the speaker column
     table_select = strcmp(temp_data_table.speaker,'NA') == 1; %remove all NA labels
     %NA labels are either double labelled entries - eg: CHN, MAN; or
-    %entreis that are only labelled REJ
+    %entries that are only labelled REJ
     temp_data_table(table_select,:) = [];
     hum_data(i).data = temp_data_table; %replaces the old table with the new tables with new speaker labels
 
     clear temp_data_table spsp newspsp
 end
 
-%now, we will match the child ids from LENA segemnts data and human
+%now, we will match the child ids from LENA segments data and human
 %labelled data so we can match start times between human and LENA data. 
 
 childid_counter = 0;
@@ -204,12 +219,18 @@ for ll = 1:length(lena_data)
     end
 end
 
-%note that the last entry in the human data - child 530 by L3 is incomplete and we are not
-%including this in our analyses. So from now on, all for loops will be for
-%length(humdata_childidmatch) - 1.
+%note that the last entry in the human data - child 530 by L3 is incomplete
+%and we are not including this in our analyses. So from now on, all for
+%loops will be for length(humdata_childidmatch) - 1.
 
 %the final step now is to match the start times of lena data and the
-%corresponding human label data. 
+%corresponding human label data.
+
+% Modify the path below for your own system. If you have downloaded
+% cohensKappa.m from https://github.com/elayden/cohensKappa.git
+% and unzipped in your Downloads folder then the line below should work as
+% is.
+addpath('~/Downloads/cohensKappa-master/');
 
 for ll = 1:length(lena_data)
     l_child = lena_data(ll).childid;
@@ -222,32 +243,32 @@ for ll = 1:length(lena_data)
         
         if strcmp(h_child,l_child) == 1 %compare if child ids from lena and human labelled data are the same
             [cc,i_l,i_h] = intersect(l_table.startsec,h_table.start);
-             %here, i_l is the matching index set for lena, and i_h is for
-             %human
-             
-             new_start = l_table.startsec(i_l);
-             new_lena_speaker = l_table.segtype(i_l);
-             new_hum_speaker = h_table.speaker(i_h);
-             
-             percag(hh,1) = sum(strcmp(new_lena_speaker,new_hum_speaker))/length(strcmp(new_lena_speaker,new_hum_speaker)); %calculates ercent agreement
-             cohens(hh,1) = cohensKappa(new_lena_speaker,new_hum_speaker); %calculates cohens kappa (uses function)
-             childid{hh,1} = l_child;
-             listenerid{hh,1} = h_listener;
-             
-             [confusionmatrix{hh},order{hh}] = confusionmat(new_lena_speaker,new_hum_speaker,'Order',["CHNSP" "MAN" "FAN"]); %creates confusion matrix with the order specified
-             %confusionchart(C{hh}) %creates confusion chart
-             
-             %note that first vector in confusionmat argument is known group, and second
-%vector is predicted - so lena is true class and hum is predicted class
-%here
-             
+            %here, i_l is the matching index set for lena, and i_h is for
+            %human
+            
+            new_start = l_table.startsec(i_l);
+            new_lena_speaker = l_table.segtype(i_l);
+            new_hum_speaker = h_table.speaker(i_h);
+            
+            percag(hh,1) = sum(strcmp(new_lena_speaker,new_hum_speaker))/length(strcmp(new_lena_speaker,new_hum_speaker)); %calculates percent agreement
+            cohens(hh,1) = cohensKappa(new_lena_speaker,new_hum_speaker); %calculates cohens kappa (uses function)
+            childid{hh,1} = l_child;
+            listenerid{hh,1} = h_listener;
+            
+            [confusionmatrix{hh},order{hh}] = confusionmat(new_lena_speaker,new_hum_speaker,'Order',["CHNSP" "MAN" "FAN"]); %creates confusion matrix with the order specified
+            %confusionchart(C{hh}) %creates confusion chart
+            
+            %note that first vector in confusionmat argument is known
+            %group, and second vector is predicted - so lena is true class
+            %and hum is predicted class here
+            
         end
         
     end
 end
 
 T = table(childid,listenerid,percag,cohens);
-writetable(T,'interraterreliab_HUM_LENA.csv')
-save('confusionmat_HUM_LENA.mat','confusionmatrix','order','childid','listenerid')
+writetable(T,'~/Downloads/interraterreliab_HUM_LENA.csv')
+save('~/Downloads/confusionmat_HUM_LENA.mat','confusionmatrix','order','childid','listenerid')
 
 
