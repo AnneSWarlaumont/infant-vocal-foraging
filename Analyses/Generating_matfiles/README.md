@@ -11,7 +11,7 @@ iv) **chresp_and_adresp.m** matches the log frequency and amplitude values for c
 
 v) **generating_humanlabelleddata.m** extracts the speaker id as determined by a human listener for a subset of recordings. This is used to extract start and end times, mean frequency and amplitude values, as well as adult and child response data, based on the human listener validation. 
 
-vi) **data_perc_agree_cohenKappa_HUM_LENA.m** generates interraterreliability measures for human labelled data wrt corresponding LENA data (percent agreement, Cohen's Kappa, confusion matrices). This uses a user-defined MATLAB function in the stats folder, so make sure the stats folder is in the path.  
+vi) **data_perc_agree_cohenKappa_HUM_LENA.m** generates interraterreliability measures for human labelled data wrt corresponding LENA data (percent agreement, Cohen's Kappa, confusion matrices). This uses the cohensKappa.m file by Elliot Layden, so make sure a folder containing that file is in the path (see comments in code for details).
 
 vii) **data_perc_agree_cohenKappa_HUM_HUM.m** generates interraterreliability measures for data from infant 340 at age 183 days labelled by listeners 1 and 3 (percent agreement, Cohen's Kappa, confusion matrices). This uses a user-defined MATLAB function in the stats folder, so make sure the stats folder is in the path.  
 
