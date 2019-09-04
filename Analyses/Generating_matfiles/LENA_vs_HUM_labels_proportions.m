@@ -5,19 +5,32 @@
 clear all
 clc
 
-%note taht we use FAN/MAN and ADULT interchanagebly in thsi code section
-%comments
+%note that we use FAN/MAN and ADULT interchanagebly in the comments below
 
-%Generating a percent agrrement-esque matrix of the form
-%           |CHN_H   |MAN/FAN_H     |CHN_OLP_H  |MAN/FAN_OLP_H       |CHN+MAN/FAN_OLP_H     |No_CHN_MAN\FAN_H
+%Generating a percent agrEement-esque matrix of the form
+%           |CHN_H   |MAN/FAN_H     |CHN_OLP_H  |MAN/FAN_OLP_H       |CHN+MAN/FAN_OLP_H     |No_CHN_MAN/FAN_H
 %CHNSP_L    |        |              |           |                    |                      |
 %MAN/FAN_L  |        |              |           |                    |                      |
 
-%This would give an estimate of what proportion of CHNSP and MAN/FAN labels
-%by LENA fall into the categories given in human labels
+%This reports the proportion of CHNSP and MAN/FAN labels by LENA that fall
+%into each human label category.
 
-%cd to folder with the segments file from LENA
-cd '/Users/ritu/Google Drive/research/vocalisation/clean_code_thats_used/data/postitsfiles_foraging_for_rvpm/seg'
+% The human-labelled categories include infant speaker label (CHN) only (Ch
+% only, column 2); adult (MAN or FAN or both) speaker only (Ad only, column
+% 3); infant speaker with non-adult speaker overlap, where the overlapping
+% speaker label could be anything except MAN or FAN (column 4); adult
+% speaker with non-infant speaker overlap, where the overlapping speaker
+% label could be anything except CHN (column 5); infant (CHN) or adult (MAN
+% or FAN) speakers but no other speaker labels (column 6); and any speaker
+% label except infant (CHN) or adult (MAN or FAN).
+
+% cd to folder with the segments file from LENA
+% Assuming you have downloaded "postitsfiles_foraging_for_rvps.zip"
+% from OSF, at https://osf.io/zn2jw/
+% and that you have unzipped it
+% and that the resulting folder is in a "Downloads" folder in your home directory
+cd '~/Downloads/postitsfiles_foraging_for_rvps/seg';
+% cd '/Users/ritu/Google Drive/research/vocalisation/clean_code_thats_used/data/postitsfiles_foraging_for_rvpm/seg' % Ritwika's path
 
 %since there are only 3 infant datsets that have been labelled by humans, I
 %found it easier to list them up rather than creating a text file with the
@@ -32,9 +45,7 @@ cd '/Users/ritu/Google Drive/research/vocalisation/clean_code_thats_used/data/po
 inf_274_82days = readtable('0274_000221_Segments1.txt');
 inf_340_183days = readtable('0340_000601_Segments1.txt');
 
-%infant 530 at 95 days has multiple segments so we will use dir to extract
-%that 
-
+%infant 530 at 95 days has multiple segments so we will use dir
 %pick out all files that are segments for infant 530 at 95 days
 aa = dir('0530_000304*.txt');
 inf_530_95days = [];
