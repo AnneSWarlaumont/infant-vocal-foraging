@@ -34,16 +34,17 @@
 clear all
 clc
 
-%cd to folder with the segments file from LENA
-cd '/Users/ritu/Google Drive/research/vocalisation/clean_code_thats_used/data/postitsfiles_foraging_for_rvpm/seg'
+%cd to folder with the segments file from LENA 
+% Assuming you have downloaded "postitsfiles_foraging_for_rvps.zip"
+% from OSF, at https://osf.io/zn2jw/
+% and that you have unzipped it
+% and that the resulting folder is in a "Downloads" folder in your home directory
+cd '~/Downloads/postitsfiles_foraging_for_rvps/seg';
+% cd '/Users/ritu/Google Drive/research/vocalisation/clean_code_thats_used/data/postitsfiles_foraging_for_rvpm/seg' % Ritwika's path
 
-%since there is only 1 infant datsets that has been labelled by humans for the same infant, I
-%found it easier to list them up rather than creating a text file with the
-%details of those filenames and automatically reading them off using dir or
-%something simliar. As the repertoire of human labelled data increases,
-%this would have to be altered
+%there is only 1 infant recording that has been labelled by two human listeners
 
-%headers for these files are: segtype (speaker or sound type: eg: CHNSP
+%headers for this LENA-based label file are: segtype (speaker or sound type: eg: CHNSP
 %(child speech related), SIL (silence), etc.), startsec (start time in
 %seconds),endsec (end time in seconds)
 
@@ -78,21 +79,27 @@ for i = 1:length(lena_data)
     
 end
 
-%cd to folder with human labels
-cd '/Users/ritu/Google Drive/research/vocalisation/clean_code_thats_used/data/human_labels'
+% cd to folder with human labels
+% Assuming you have downloaded "Human_labels" as zip
+% from OSF, at https://osf.io/8ern6/files/
+% and that you have unzipped it
+% and that the resulting folder is in a "Downloads" folder in your home directory
+cd '~/Downloads/Human_labels';
+% cd '/Users/ritu/Google Drive/research/vocalisation/clean_code_thats_used/data/human_labels' % Ritwika's path
 
 hum = dir('*.csv');
 
-%now, we need to match the data in hum to the LENA labelled data by infant
+%Now, we need to match the data in hum to the LENA labelled data by infant
 %id. We also need to isolate listener id. Then, we will compare start times
-%(Note that we are only doing this for infant 340 at age 183 days) from the LENA data and human
-%labelled data to see which segements were abelled by the human listeners.
-%We will also store the speaker type as identified by LENA and human
-%listener, and thsi will the final output file.
+%from the LENA data and human labelled data to see which segements were
+%labelled by the human listeners. We will also store the speaker type as
+%identified by LENA and human listener, and this will the final output
+%file.
 
-%headres in human labelled files: start, end (MATLAB will change this to
-%end1 or end<a number> to make it a valid MATLAB identifier), recording_id,
-%child_id, speaker (as identified by human listener), coder, method. 
+%headers in human labelled files: start, end (MATLAB will change this to
+%end1 or end<a number> or xend to make it a valid MATLAB identifier),
+%recording_id, child_id, speaker (as identified by human listener), coder,
+%method.
 
 %We will use child_id to match child id, coder to match listener, and start
 %to match start times
@@ -124,7 +131,7 @@ for i = 1:length(hum_data)
     
     spsp = temp_data_table.speaker; %note that this is a vertical array of cell arrays
     
-    %rrelabelling of speaker labels
+    %relabelling of speaker labels
     for k = 1:length(spsp)
         if isempty(regexp(spsp{k},chexp)) == 0 %check if result of regexp is empty -> if empty, there is no match
             newspsp{k} = 'CHNSP'; %note that at this point not all relabelled CHNSP labels in human 
@@ -150,11 +157,11 @@ for i = 1:length(hum_data)
     clear temp_data_table spsp newspsp
 end
 
-%now, we will match the child ids from LENA segemnts data and human
+%now, we will match the child ids from LENA segments data and human
 %labelled data so we can match start times between human and LENA data. 
 %Note that since we are only dealing with infant id 340 (2 human
 %listeners), we will only have a single child id and two datasets for that
-%corresponding to human listeners.
+%corresponding to the two human listeners.
 
 childid_counter = 0;
 
@@ -211,6 +218,12 @@ new_h1_speaker = newt1.speaker(i_1); %generate new tables based on matching star
 %in the larger LENA dataset - CHNSP, MAN, and FAN. 
 new_h2_speaker = newt2.speaker(i_2);
 
+% Modify the path below for your own system. If you have downloaded
+% cohensKappa.m from https://github.com/elayden/cohensKappa.git
+% and unzipped in your Downloads folder then the line below should work as
+% is.
+addpath('~/Downloads/cohensKappa-master/');
+
 %compute percent agreement, cohens kappa
 percag = sum(strcmp(new_h1_speaker,new_h2_speaker))/length(strcmp(new_h1_speaker,new_h2_speaker));
 cohens = cohensKappa(new_h1_speaker,new_h2_speaker);
@@ -221,6 +234,14 @@ childid = h_child;
 %note that first vector in confusionmat argument is known group, and second
 %vector is predicted
 
-%also note speaker 1 is L1, AND SPEAKER 2 IS L3
+%also note listener 1 is L1, AND listener 2 IS L3
+listener1id = humdata_childidmatch(1).listener;
+listener2id = humdata_childidmatch(2).listener;
+
+C = {childid,listener1id,listener2id,percag,cohens};
+T = cell2table(C,'VariableNames',{'childid','listener1id','listener2id','percag','cohens'});
+writetable(T,'~/Downloads/interraterreliab_HUM_HUM.csv')
+save('~/Downloads/confusionmat_HUM_HUM.mat','Confusionmat_HUM_HUM','order','childid')
+
              
              

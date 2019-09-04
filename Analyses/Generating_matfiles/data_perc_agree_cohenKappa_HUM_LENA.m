@@ -46,8 +46,7 @@ clc
 % and that you have unzipped it
 % and that the resulting folder is in a "Downloads" folder in your home directory
 cd '~/Downloads/postitsfiles_foraging_for_rvps/seg';
-% cd '/Users/ritu/Google
-% Drive/research/vocalisation/clean_code_thats_used/data/postitsfiles_foraging_for_rvpm/seg' % Ritwika's path
+% cd '/Users/ritu/Google Drive/research/vocalisation/clean_code_thats_used/data/postitsfiles_foraging_for_rvpm/seg' % Ritwika's path
 
 %since there are only 3 infant datsets that have been labelled by humans, I
 %found it easier to list them up rather than creating a text file with the
