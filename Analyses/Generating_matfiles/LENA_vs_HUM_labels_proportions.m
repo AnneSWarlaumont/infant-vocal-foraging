@@ -201,9 +201,9 @@ for i = 1:length(humdata_childidmatch)-1
     hum_spkrlabs_lenaad = humdata_childidmatch(i).lenaad.speaker; %Humnan listener speaker labels from data labelled as ADULT by LENA
 
     %create label elements for the table
-final1(1,1)="_";final1(1,2)="CHN_H";final1(1,3)="MAN/FAN_H";final1(1,4)="CHN_OLP_H";final1(1,5)="MAN/FAN_OLP_H";final1(1,6)="CHN/FAN/MAN_OLP_H";final1(1,7)="No_CHN/MAN/FAN_H";
-final1(2,1)="CHN_L";
-final1(3,1)="MAN/FAN_L";
+    final1(1,1)="_";final1(1,2)="CHN_H";final1(1,3)="MAN/FAN_H";final1(1,4)="CHN_OLP_H";final1(1,5)="MAN/FAN_OLP_H";final1(1,6)="CHN/FAN/MAN_OLP_H";final1(1,7)="No_CHN/MAN/FAN_H";
+    final1(2,1)="CHN_L";
+    final1(3,1)="MAN/FAN_L";
     
     %proportion of vocs labelled as CHNSP by LENA that fall into different
     %hum label categories
