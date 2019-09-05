@@ -95,21 +95,27 @@ for i = 1:length(lena_data)
     
 end
 
-%cd to folder with human labels
-cd '/Users/ritu/Google Drive/research/vocalisation/clean_code_thats_used/data/human_labels'
+% cd to folder with human labels
+% Assuming you have downloaded "Human_labels" as zip
+% from OSF, at https://osf.io/8ern6/files/
+% and that you have unzipped it
+% and that the resulting folder is in a "Downloads" folder in your home directory
+cd '~/Downloads/Human_labels';
+% cd '/Users/ritu/Google Drive/research/vocalisation/clean_code_thats_used/data/human_labels' % Ritwika's path
 
 hum = dir('*.csv');
 
 %now, we need to match the data in hum to the LENA labelled data by infant
 %id. We also need to isolate listener id. Then, we will compare start times
 %from, for example infant 530 at 95 days, from the LENA data and human
-%labelled data to see which segements were abelled by the human listeners.
+%labelled data to see which segments were labelled by the human listeners.
 %We will also store the speaker type as identified by LENA and human
-%listener, and thsi will the final output file.
+%listener, and this will go in the final output file.
 
-%headres in human labelled files: start, end (MATLAB will change this to
-%end1 or end<a number> to make it a valid MATLAB identifier), recording_id,
-%child_id, speaker (as identified by human listener), coder, method. 
+%headers in human labelled files: start, end (MATLAB will change this to
+%end1 or end<a number> or xend to make it a valid MATLAB identifier),
+%recording_id, child_id, speaker (as identified by human listener), coder,
+%method.
 
 %We will use child_id to match child id, coder to match listener, and start
 %to match start times
@@ -123,14 +129,13 @@ for i = 1:length(hum)
     %string
     %we cannot use the same to store child ids because at least one human
     %label file has 2 different child ids.
-       
 end
 
-%now, we will match the child ids from LENA segemnts data and human
+%now, we will match the child ids from LENA segments data and human
 %labelled data so we can match start times between human and LENA data. We
 %will do this seperately for LENA_CHNSP labels, and LENA_AD labels.
 
-%we will also sort out data from diffent infants labelled by the same
+%we will also sort out data from different infants labelled by the same
 %listener
 
 childid_counter = 0;

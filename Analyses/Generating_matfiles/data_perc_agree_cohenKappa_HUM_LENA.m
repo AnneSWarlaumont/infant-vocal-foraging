@@ -118,9 +118,9 @@ hum = dir('*.csv');
 %now, we need to match the data in hum to the LENA labelled data by infant
 %id. We also need to isolate listener id. Then, we will compare start times
 %from, for example infant 530 at 95 days, from the LENA data and human
-%labelled data to see which segements were labelled by the human listeners.
+%labelled data to see which segments were labelled by the human listeners.
 %We will also store the speaker type as identified by LENA and human
-%listener, and this will the final output file.
+%listener, and this will go in the final output file.
 
 %headers in human labelled files: start, end (MATLAB will change this to
 %end1 or end<a number> or xend to make it a valid MATLAB identifier),
