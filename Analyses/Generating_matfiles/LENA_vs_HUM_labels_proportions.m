@@ -17,12 +17,13 @@ clc
 
 % The human-labelled categories include infant speaker label (CHN) only (Ch
 % only, column 2); adult (MAN or FAN or both) speaker only (Ad only, column
-% 3); infant speaker with non-adult speaker overlap, where the overlapping
-% speaker label could be anything except MAN or FAN (column 4); adult
-% speaker with non-infant speaker overlap, where the overlapping speaker
-% label could be anything except CHN (column 5); infant (CHN) or adult (MAN
-% or FAN) speakers but no other speaker labels (column 6); and any speaker
-% label except infant (CHN) or adult (MAN or FAN).
+% 3); infant speaker with possible non-adult speaker overlap, where the
+% overlapping speaker label could be anything except MAN or FAN (column 4);
+% adult speaker with possible non-infant speaker overlap, where the
+% overlapping speaker label could be anything except CHN (column 5); infant
+% (CHN) and/or adult (MAN or FAN) speakers but no other speaker labels
+% (column 6); and any speaker label except infant (CHN) or adult (MAN or
+% FAN).
 
 % cd to folder with the segments file from LENA
 % Assuming you have downloaded "postitsfiles_foraging_for_rvps.zip"
@@ -177,19 +178,19 @@ for ll = 1:length(lena_data)
     end
 end
 
-%note that the last entry in the human data - child 530 by L3 is incomplete and we are not
-%including this in our analyses. So from now on, all for loops will be for
-%length(humdata_childidmatch) - 1.
+%note that the last entry in the human data - child 530 by L3 is incomplete
+%and we are not including this in our analyses. So from now on, all for
+%loops will be for length(humdata_childidmatch) - 1.
 
 chexp = '^(.(?<!CXN|MAN|FAN))*CHN(.(?!CXN|MAN|FAN))*$'; %CHN labels only
 adexp = '^(.(?<!CXN|CHN))*[FM]AN(.(?!CXN|CHN))*$'; %adult labels only (FAN or MAN)
-cholp = '^(.(?<!MAN|FAN))*CHN(.(?!MAN|FAN))*$'; %CHN overlapped with CXN, but no MAN/FAN
-adolp = '^(.(?<!CHN))*[FM]AN(.(?!CHN))*$'; %MAN/FAN overlapped with CXN but no CHN
+cholp = '^(.(?<!MAN|FAN))*CHN(.(?!MAN|FAN))*$'; %CHN or CHN overlapped with CXN, but no MAN/FAN
+adolp = '^(.(?<!CHN))*[FM]AN(.(?!CHN))*$'; %MAN/FAN or MAN/FAN overlapped with MAN/FAN or CXN but no CHN
 ch_adolp = '[CFM][HA]N'; %has CHN, MAN or FAN
 
 %Note that to find labels without adult or child labels, we can simply
 %check if the chn_adolp result is an empty set or not. If the chn_adolp
-%result is non-empty, that means that teh label has either CHN or MAN or
+%result is non-empty, that means that the label has either CHN or MAN or
 %FAN or combos of these. If the result is empty, then none of those labels
 %are present
 
