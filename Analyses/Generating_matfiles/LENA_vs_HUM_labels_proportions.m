@@ -247,7 +247,7 @@ for i = 1:length(humdata_childidmatch)-1
   
 end
 
-save('hum_lena_labels_proportions.mat','hum_lena_labels_proportions')
+save('~/Downloads/hum_lena_labels_proportions.mat','hum_lena_labels_proportions')
 
     
 
