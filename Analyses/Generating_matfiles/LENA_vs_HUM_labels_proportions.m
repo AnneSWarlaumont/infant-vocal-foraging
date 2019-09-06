@@ -206,19 +206,20 @@ for i = 1:length(humdata_childidmatch)-1
     final1(3,1)="MAN/FAN_L";
     
     %proportion of vocs labelled as CHNSP by LENA that fall into different
-    %hum label categories
-    final1(2,2) = sum(uint8(~cellfun(@isempty,regexp(hum_spkrlabs_lenach,chexp))))/length(hum_spkrlabs_lenach); %regexp tests whether the 
-    %speaker labels by human listener for vocs labelled by LENA as CHNSP fraction contains only CHN as labelled by human listener. If there is 
-    % a match, a non-empty matrix is returned and if not, an empty matrix
-    % is retunred. @isempty converts thsi information to logical 1s and 0s
-    % -> if the human labelled a voc as CHN only, then it would be a
-    % logical 0, because the result of regexp is not empty. The negation
-    % (~) converts logical 1s to 0s and vice-versa.
-    %uint8 converts the logicals to numbers so that it can be
-    % summed over. Dividing this sum by the total number of vocs that LENA
-    % identified as CHNSP (which is what we were comparing with HUM labels)
-    % gives the fraction of vocs that LENA labelled as CHNSP taht ended up
-    % being labelled by HUM as CHN only.
+    %hum label categories.
+    final1(2,2) = sum(uint8(~cellfun(@isempty,regexp(hum_spkrlabs_lenach,chexp))))/length(hum_spkrlabs_lenach);%Hum label category: CHN only
+    % In the line above, regexp tests whether the speaker labels by human
+    % listener for vocs labelled by LENA as CHNSP fraction contains only
+    % CHN as labelled by human listener. If there i a match, a non-empty
+    % matrix is returned and if not, an empty matrix is retunred. @isempty
+    % converts thsi information to logical 1s and 0s -> if the human
+    % labelled a voc as CHN only, then it would be a logical 0, because the
+    % result of regexp is not empty. The negation (~) converts logical 1s
+    % to 0s and vice-versa. uint8 converts the logicals to numbers so that
+    % it can be summed over. Dividing this sum by the total number of vocs
+    % that LENA identified as CHNSP (which is what we were comparing with
+    % HUM labels) gives the fraction of vocs that LENA labelled as CHNSP
+    % that ended up being labelled by HUM as CHN only.
     final1(2,3) = sum(uint8(~cellfun(@isempty,regexp(hum_spkrlabs_lenach,adexp))))/length(hum_spkrlabs_lenach); %Hum label category: adlt only
     final1(2,4) = sum(uint8(~cellfun(@isempty,regexp(hum_spkrlabs_lenach,cholp))))/length(hum_spkrlabs_lenach);%Hum label: CHN + other overlap allowed, no adult
     final1(2,5) = sum(uint8(~cellfun(@isempty,regexp(hum_spkrlabs_lenach,adolp))))/length(hum_spkrlabs_lenach);%Hum label: adlt + other overlap allowed, no CHN
