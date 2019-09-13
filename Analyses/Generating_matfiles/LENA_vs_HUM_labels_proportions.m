@@ -21,7 +21,7 @@ clc
 % overlapping speaker label could be anything except MAN or FAN (column 4);
 % adult speaker with possible non-infant speaker overlap, where the
 % overlapping speaker label could be anything except CHN (column 5); infant
-% (CHN) and/or adult (MAN or FAN) speakers but no other speaker labels
+% (CHN) and/or adult (MAN or FAN) speakers with possible other child overlap
 % (column 6); and any speaker label except infant (CHN) or adult (MAN or
 % FAN).
 
