@@ -4,7 +4,7 @@ Also note, function cohensKappa.m was written by Elliot Layden and downloaded fr
 
 These files can be executed in any order (except for makenewdf_stepsiparam_lmer.R, which is a function called by stepsize_dist_param_stats.R).
 
-**mean_stddev_acoustic_features_stats.R** uses a linear mixed effects model runs a linear mixed effects model on mean and std. dev of acoustic features (normalised amplitude and log pitch) with infant ID as a random effect and infant age as a fixed effect. Outputs "mean_std_acousticdim_stats.csv".
+**mean_stddev_acoustic_features_stats.R** uses a linear mixed effects model on mean and std. dev of acoustic features (normalised amplitude and log pitch) with infant ID as a random effect and infant age as a fixed effect. Outputs "mean_std_acousticdim_stats.csv".
 
 **correlation_lmer.R** tests whether steps in acoustic space and time for infants and adults are positively correlated using a linear mixed effects model by accounting for effects of infant age and optional response, and infantage-response interaction effects, and using infant id as a random effect. Outputs "lmer_correlation_stats.csv".
 
@@ -15,6 +15,8 @@ These files can be executed in any order (except for makenewdf_stepsiparam_lmer.
 **makenewdf_stepsiparam_lmer.R** is a function required to run stepsize_dist_param_stats.R, where only the majority fit type curves are selected for the analyses for a given distribution type. For example, the majority best fit type for infant pitch step size distributions (WR) is exponential. This function writes a dataframe that only contains infant pitch step size distributions (WR) that are determined to best fit to an exponential per AIC to perform the linear mixed effects analysis on. It is assumed that the input csv files have columns where the parameters for each step type distribution are the ones appropriate for the majority fit type.
 
 **logistic_regression_Rcode.R** uses a logistic regression model to test whether some vocalisations or vocalisation patterns are more likely to recieve responses for LENA data. Outputs "logistic_regression_results.csv".
+
+**meanstd_WRWOR_acousticdim_stats.R** uses alinear mixed effects model on mean and std. dev of acoustic features (normalised amplitude and log pitch) with infant ID as a random effect and infant age, reception of a response, and optional age-response interaction as fixed effects. Outputs "meanstd_WRWOR_stats.csv".
 
 
 
